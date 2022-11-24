@@ -12,10 +12,21 @@ export default class HttpRepo {
 
   remoteUrl = `${this.url}/data/read/${this.pluginId}/${this.collectionName}/${this.organizationId}`;
 
-  constructor(collectionName, organizationId = '12345678') {
+  constructor(collectionName='task', organizationId = '12345678') {
     this.collectionName = collectionName;
     this.organizationId = organizationId;
+
+    this.request = {
+        plugin_id: this.pluginId,
+        organization_id: this.organizationId,
+        collection_name: this.collectionName,
+        bulk_write: false,
+        object_id: 'xxxx',
+        filter: {},
+        payload: payloadObject,
+    }
   }
+
 
   buildQueryStr(whereObject) {
     const queryStr = '';
@@ -77,58 +88,29 @@ export default class HttpRepo {
   }
 
   async create(payloadObject) {
-    const request = {
-      plugin_id: this.pluginId,
-      organization_id: this.organizationId,
-      collection_name: this.collectionName,
-      bulk_write: false,
-      object_id: 'xxxx',
-      filter: {},
-      payload: payloadObject,
-    };
+    this.request.payload = payloadObject;
 
-    return await this.postReq(`${this.remoteUrl}/data/write`, request);
+    return await this.postReq(`${this.remoteUrl}/data/write`, this.request);
   }
 
   async store(objectId, payloadObject) {
-    const request = {
-      plugin_id: this.pluginId,
-      organization_id: this.organizationId,
-      collection_name: this.collectionName,
-      bulk_write: false,
-      object_id: objectId,
-      filter: {},
-      payload: payloadObject,
-    };
+    this.request.object_id = objectId;
+    this.request.payload = payloadObject;
 
-    return await this.postReq(`${this.remoteUrl}/data/write`, request);
+    return await this.postReq(`${this.remoteUrl}/data/write`, this.request);
   }
 
   async update(objectId, payloadObject) {
-    const request = {
-      plugin_id: this.pluginId,
-      organization_id: this.organizationId,
-      collection_name: this.collectionName,
-      bulk_write: false,
-      object_id: objectId,
-      filter: {},
-      payload: payloadObject,
-    };
+    this.request.object_id = objectId;
+    this.request.payload = payloadObject;
 
-    return await this.putReq(`${this.remoteUrl}/data/write`, request);
+    return await this.putReq(`${this.remoteUrl}/data/write`, this.request);
   }
 
   async delete(objectId) {
-    const request = {
-      plugin_id: this.pluginId,
-      organization_id: this.organizationId,
-      collection_name: this.collectionName,
-      bulk_write: false,
-      object_id: objectId,
-      filter: {},
-      payload: {},
-    };
-    return await this.deleteReq(`${this.remoteUrl}/data/write`, request);
+    this.request.object_id = objectId;
+    
+    return await this.deleteReq(`${this.remoteUrl}/data/write`, this.request);
   }
 
   async findWorkSpaceUsers(bearerToken) {
