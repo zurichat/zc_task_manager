@@ -10,23 +10,24 @@ export default class HttpRepo {
 
   collectionName = '';
 
-  remoteUrl = `${this.url}/data/read/${this.pluginId}/${this.collectionName}/${this.organizationId}`;
+  readUrl = `${this.url}/data/read/${this.pluginId}/${this.collectionName}/${this.organizationId}`;
 
-  constructor(collectionName='task', organizationId = '12345678') {
+  writeUrl = `${this.url}/data/write`;
+
+  constructor(collectionName = 'task', organizationId = '12345678') {
     this.collectionName = collectionName;
     this.organizationId = organizationId;
 
     this.request = {
-        plugin_id: this.pluginId,
-        organization_id: this.organizationId,
-        collection_name: this.collectionName,
-        bulk_write: false,
-        object_id: 'xxxx',
-        filter: {},
-        payload: payloadObject,
-    }
+      plugin_id: this.pluginId,
+      organization_id: this.organizationId,
+      collection_name: this.collectionName,
+      bulk_write: false,
+      object_id: 'xxxx',
+      filter: {},
+      payload: {},
+    };
   }
-
 
   buildQueryStr(whereObject) {
     const queryStr = '';
@@ -48,7 +49,7 @@ export default class HttpRepo {
 
   async postReq(url, data, config = {}) {
     if (Object.keys(config).length === 0) {
-      return axios.get(url, data);
+      return axios.post(url, data);
     }
     return axios.post(url, data, config);
   }
@@ -69,7 +70,7 @@ export default class HttpRepo {
   }
 
   async findAll() {
-    const result = await this.getReq(this.remoteUrl);
+    const result = await this.getReq(this.readUrl);
 
     return result;
   }
@@ -77,40 +78,40 @@ export default class HttpRepo {
   async findWhere(whereObject = {}) {
     const whereStr = this.buildQueryStr(whereObject);
 
-    const result = await this.getReq(`${this.remoteUrl}?${whereStr}`);
+    const result = await this.getReq(`${this.readUrl}?${whereStr}`);
 
     return result;
   }
 
   async findFirst() {
-    const result = await axios.get(this.remoteUrl);
+    const result = await axios.get(this.readUrl);
     return result.data['data'][0];
   }
 
   async create(payloadObject) {
     this.request.payload = payloadObject;
 
-    return await this.postReq(`${this.remoteUrl}/data/write`, this.request);
+    return await this.postReq(this.writeUrl, this.request);
   }
 
   async store(objectId, payloadObject) {
     this.request.object_id = objectId;
     this.request.payload = payloadObject;
 
-    return await this.postReq(`${this.remoteUrl}/data/write`, this.request);
+    return await this.postReq(this.writeUrl, this.request);
   }
 
   async update(objectId, payloadObject) {
     this.request.object_id = objectId;
     this.request.payload = payloadObject;
 
-    return await this.putReq(`${this.remoteUrl}/data/write`, this.request);
+    return await this.putReq(this.writeUrl, this.request);
   }
 
   async delete(objectId) {
     this.request.object_id = objectId;
-    
-    return await this.deleteReq(`${this.remoteUrl}/data/write`, this.request);
+
+    return await this.deleteReq(this.writeUrl, this.request);
   }
 
   async findWorkSpaceUsers(bearerToken) {
