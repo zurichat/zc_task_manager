@@ -1,3 +1,9 @@
+import AssignerDeleteTask from "./components/AssignerDeleteTask/AssignerDeleteTask"
+
 export default function Root() {
-  return <>Hello World</>
+  return (
+    <>
+      <AssignerDeleteTask />
+    </>
+  )
 }
