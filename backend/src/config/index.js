@@ -21,13 +21,6 @@ const config = {
   app: {
     port: +process.env.PORT,
   },
-  db: {
-    host: process.env.DB_HOST || 'localhost',
-    port: +(process.env.DB_PORT || 3306),
-    database: isTestEnvironment ? process.env.TEST_DB_DATABASE : process.env.DB_DATABASE,
-    user: isTestEnvironment ? process.env.TEST_DB_USER : process.env.DB_USER,
-    password: isTestEnvironment ? process.env.TEST_DB_PASSWORD : process.env.DB_PASSWORD,
-  },
 };
 export const validateConfig = () => {
   const missingKeys = [];
