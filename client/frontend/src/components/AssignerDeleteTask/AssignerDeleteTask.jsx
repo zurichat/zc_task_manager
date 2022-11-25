@@ -1,11 +1,11 @@
 import React from "react"
 import style from "./AssignerDeleteTask.module.css"
 
-function AssignerDeleteTask({ onDelete }) {
+function AssignerDeleteTask({ onDelete, close_modal }) {
   return (
     <div className={style.container}>
       <div className={style.card}>
-        <div className={style.circle}>
+        <button onClick={close_modal} className={style.close_btn}>
           <svg
             width="31"
             height="31"
@@ -28,7 +28,7 @@ function AssignerDeleteTask({ onDelete }) {
               stroke-linejoin="round"
             />
           </svg>
-        </div>
+        </button>
 
         <div className={style.confirmation_msg}>
           <h2>Delete Task</h2>

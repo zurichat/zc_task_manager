@@ -5,6 +5,7 @@
   position: absolute;
   inset: 0;
   font-weight: 400;
+  z-index: 200;
 }
 
 .container * {
@@ -28,13 +29,15 @@
   padding: 37px 24px 0;
 }
 
-.circle {
+.close_btn {
   width: 85px;
   height: 85px;
   background-color: #ffeeee;
   display: grid;
   place-items: center;
   border-radius: 50%;
+  border: none;
+  cursor: pointer;
 }
 
 .confirmation_msg {
