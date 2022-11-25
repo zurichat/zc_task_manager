@@ -1,0 +1,26 @@
+.assignment-details-grp {
+    display: flex;
+    justify-content: space-between;
+}
+
+.assignment-details {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.assignment-details span {
+    text-align: center;
+}
+
+.action-grp {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.action-grp .task-notif {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
