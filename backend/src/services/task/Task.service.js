@@ -7,12 +7,17 @@ class TaskService extends HttpRepo {
   }
 
   async create(params) {
+    this.request = { ...this.request, collection_name: 'task' };
+    
     const create = await this.repo.create(params);
 
     return create;
   };
 
   async assign(id, params) {
+    const collectionName = 'assigned_tasks';
+    this.request = { ...this.request, collection_name: collectionName };
+
     const assign = await this.repo.store(id, params);
 
     return assign;
