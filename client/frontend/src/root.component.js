@@ -8,7 +8,7 @@ export default function Root() {
       <Header />
       <TaskHistory />
       {/* The below AssignerDeleteTask should be moved into the Assigner/ Candidate Task Assigned page and be toggled from there and closed with prop close_modal */}
-      {/* <AssignerDeleteTask /> */}
+      <AssignerDeleteTask />
     </>
   )
 }
