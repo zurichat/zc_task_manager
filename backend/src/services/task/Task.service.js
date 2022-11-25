@@ -7,6 +7,40 @@ class TaskService extends HttpRepo {
   }
 
   async create(params) {
+    this.request = { ...this.request, collection_name: 'task' };
+
+    const create = await this.repo.create(params);
+
+    return create;
+  }
+
+  async assign(id, params) {
+    const assign = await this.repo.store(id, params);
+
+    return assign;
+  }
+
+  async reassign(id, params) {
+    const reassign = await this.repo.store(id, params);
+
+    return reassign;
+  }
+
+  async getAllTasks() {
+    const get = await this.repo.findAll();
+    if (!get) throw new NotFoundError('An error occured while fetching tasks');
+
+    return get;
+  }
+
+  async getTaskByMe(params) {
+    const get = await this.repo.findWhere(params);
+    if (!get) throw new NotFoundError('An error occured while fetching tasks');
+
+    return get;
+  }
+
+  async createTaskCategory(params) {
     const create = await this.repo.create(params);
     return create;
   }
@@ -23,10 +57,20 @@ class TaskService extends HttpRepo {
   }
   async history() {
     const result = await this.repo.findAll();
-    const submitted = await this.getSubmittedTask();
+    const submitted = await this.getSubmittedTask()?.data;
     const tasks = result?.data;
-    const history = tasks.filter((task) => task.submitted === true);
-    return { history, submitted };
+    const history = tasks.filter((task) => {
+      submitted.some((obj) => {
+        return task._id === obj.task_id;
+      });
+    });
+    return history;
+  }
+  async submitTask(data) {
+    const collectionName = 'submissions';
+    this.request = { ...this.request, collection_name: collectionName };
+    const submission = await this.repo.create(data);
+    return submission;
   }
 }
 
