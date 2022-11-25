@@ -9,8 +9,9 @@ export default class HttpRepo {
   // organizationId = '61db3b27eba8adb50ca1399b';
 
   // collectionName = 'task';
-
  
+  // readUrl = `${this.url}/data/read/${this.pluginId}/${this.collectionName}/${this.organizationId}`;
+  readUrl = `${this.url}/data/read`;
 
   writeUrl = `${this.url}/data/write`;
 

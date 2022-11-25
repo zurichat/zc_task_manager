@@ -1,33 +1,35 @@
+.task__history {
+  padding: 1.5rem 3rem 2rem;
+}
 .task-history-header {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .task-history-header .filter {
-    display: flex;
-    gap: 40px;
+  display: flex;
+  gap: 40px;
 }
 
 .task-history .table {
-    width: 100%;
-    border-collapse: collapse;
-    color: #616061
+  width: 100%;
+  border-collapse: collapse;
+  color: #616061;
 }
 
 .table td,
 .table th {
-    padding: 12px 15px;
+  padding: 12px 15px;
 }
 
 .table th {
-    text-align: left;
+  text-align: left;
 }
 
-
 .goto-btn {
-    border: 1px solid #00b870;
-    color: #00b870;
-    background: white;
-    padding: 15px;
-    margin-bottom: 25px;
+  border: 1px solid #00b870;
+  color: #00b870;
+  background: white;
+  padding: 15px;
+  margin-bottom: 25px;
 }

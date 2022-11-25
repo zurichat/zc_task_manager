@@ -10,6 +10,18 @@ class TaskService extends HttpRepo {
     const create = await this.repo.create(params);
 
     return create;
+  };
+
+  async assign(id, params) {
+    const assign = await this.repo.store(id, params);
+
+    return assign;
+  }
+
+  async reassign(id, params) {
+    const reassign = await this.repo.store(id, params);
+
+    return reassign;
   }
 
   async getAllTasks() {
