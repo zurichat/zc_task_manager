@@ -30,9 +30,7 @@ export default class TaskController {
   static async getTaskHistory(req, res, next) {
     try {
       // Request validation required
-
       const result = await taskService.history();
-      console.log(result);
       return res.send(result?.data);
     } catch (error) {
       next(error);

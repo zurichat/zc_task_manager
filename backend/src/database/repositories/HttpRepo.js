@@ -73,11 +73,11 @@ export default class HttpRepo {
   }
 
   async deleteReq(url, data) {
-    return axios.post(url, data);
+    return axios.post(url, JSON.stringify(data));
   }
 
   async findAll() {
-    const result = await this.getReq(this.writeUrl, this.request);
+    const result = await this.getReq(this.readUrl, this.request);
     return result;
   }
 

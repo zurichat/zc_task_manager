@@ -16,6 +16,10 @@ class TaskService extends HttpRepo {
     const remove = await this.repo.delete(objectId);
     return remove;
   }
+  async history() {
+    const history = await this.repo.findAll();
+    return history;
+  }
 }
 
 export default new TaskService();
