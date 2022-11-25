@@ -21,7 +21,9 @@ const AddTask = () => {
   }
   return (
     <div style={{ width: "100%", padding: "2rem 3rem 1.5rem" }}>
-      <Header />
+      <Header 
+      link=''
+      />
       <div className={style.addTaskContainer}>
         <form>
           <div>
