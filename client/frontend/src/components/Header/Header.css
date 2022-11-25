@@ -1,26 +1,62 @@
+.assignment__header {
+  padding: 2rem 3rem 1.5rem;
+}
+
 .assignment-details-grp {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.design__mentor {
+  color: #616061;
+  margin-top: 0.5rem;
 }
 
 .assignment-details {
-    display: flex;
-    gap: 40px;
-    align-items: center;
+  display: flex;
+  margin: 1rem 0 1.5rem;
+  align-items: center;
 }
 
 .assignment-details span {
-    text-align: center;
+  text-align: center;
+  margin-right: 1.5rem;
+  font-size: 15px;
+  line-height: 28px;
 }
-
+.assigned_number {
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 0.2rem;
+}
+.assigned_title {
+  font-weight: 400;
+  color: #616061;
+}
 .action-grp {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .action-grp .task-notif {
-    display: flex;
-    gap: 30px;
-    align-items: center;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+.assignment__button,
+.assignment__button-1 {
+  background: #00b87c;
+  border: none;
+  color: #ffffff;
+}
+
+.assignment__button {
+  border-radius: 3px;
+  padding: 16px 20px;
+}
+.assignment__button-1 {
+  padding: 12px 18px;
+  background: #00b87c;
+  border-radius: 4px 4px 0px 0px;
 }
