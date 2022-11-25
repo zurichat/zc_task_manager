@@ -22,5 +22,5 @@ align-items: center;
 }
  .assignee-nav a img :hover{
     display: flex;
-    align-items: center;
+    align-items: center;    
 }
