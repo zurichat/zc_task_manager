@@ -33,7 +33,7 @@ export default class HttpRepo {
     const queryStr = '';
     const whereKey = Object.keys(whereObject);
 
-    if (whereKey.length) {
+    if (whereKey.length===0) {
       return '';
     }
 
@@ -44,7 +44,7 @@ export default class HttpRepo {
       queryStr = `${key}=${whereValue[index]}&`;
     });
 
-    return queryStr.trimEnd('&');
+    return queryStr.slice(0, -1);
   }
 
   async postReq(url, data, config = {}) {
