@@ -38,7 +38,15 @@ const Header = () => {
       <div className="action-grp">
         <div className="task-notif">
           <button className="assignment__button-1">
-            <p className="assignment__p">Assigned</p>
+            <p
+              className="assignment__p"
+              onClick={() => {
+                navigate("/")
+                setShow(false)
+              }}
+            >
+              Assigned
+            </p>
             <RiArrowDownSLine
               className="assignment__svg"
               onClick={() => setShow(true)}
@@ -47,9 +55,9 @@ const Header = () => {
           {show && (
             <ul className="assignment__lists">
               {["By me", "For me", "Task history"].map((item, index) => (
-                <li key={index}>
+                <li key={index} onClick={() => setShow(false)}>
                   <Link to={`/${item.toLowerCase().replace(" ", "")}`}>
-                    {item}{" "}
+                    {item}
                   </Link>
                 </li>
               ))}

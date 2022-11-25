@@ -30,6 +30,7 @@
 .fil {
   display: flex;
   align-items: center;
+  position: relative;
 }
 .p {
   font-weight: 400;
@@ -39,9 +40,23 @@
   border-bottom: 1.2px solid #00b87c;
   color: #00b87c;
   margin-right: 0.5rem;
+  cursor: pointer;
 }
 .svg {
   height: 2rem;
   width: 2rem;
   fill: #00b87c;
+}
+
+.div {
+  position: absolute;
+  bottom: -110%;
+  right: 15%;
+  background: #ffffff;
+  box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
+  border-radius: 0.2rem;
+  padding: 1rem 1.5rem;
+  list-style: none;
+  z-index: 50;
+  width: 160px;
 }
