@@ -1,0 +1,37 @@
+{
+  "name": "zuri-task-manager",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zurichat/zc_task_manager"
+  },
+  "license": "MIT",
+  "scripts": {
+    "start": "serve dist/ -p 9001",
+    "open": "opener http://localhost:9010",
+    "dev:root": "yarn --cwd root-config dev",
+    "dev:task-manager": "yarn --cwd frontend dev",
+    "dev": "concurrently yarn:dev:*",
+    "lint": "concurrently yarn:lint:*",
+    "prettify": "prettier -w .",
+    "prettier:check": "prettier --check .",
+    "setup": "concurrently yarn:setup:*",
+    "setup:root": "cd root-config && yarn",
+    "setup:task-manager": "cd frontend && yarn",
+    "clean:fresh": "rimraf node_modules root-config/node_modules frontend/node_modules",
+    "clean": "rimraf dist",
+    "build": "concurrently --kill-others-on-fail -m 1 \"yarn run clean\" \"yarn:build:*\"",
+    "build:root": "cd root-config && yarn build",
+    "build:task-manager": "cd frontend && yarn build"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "opener": "^1.5.2",
+    "prettier": "^2.8.0",
+    "rimraf": "^3.0.2",
+    "serve": "^14.1.2"
+  },
+  "dependencies": {
+    "react": "17.0.2"
+  }
+}
