@@ -1,0 +1,91 @@
+.assignee-body{
+    max-width:1440vw;
+    width:100%
+}
+.assignee-nav{
+    display: flex;
+}
+.assignee-nav a{
+    margin-inline: 24px;
+}
+.assignee-toggle{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 32px;
+    margin-bottom: 64px;
+}
+.assignee-toggle div{
+    margin-inline:24px;
+}
+.assignee-zuri{
+    margin-inline: 24px;
+}
+.assignee-feature{
+    padding-inline: 24px;
+    border:1px solid  #E5E5E5;
+}
+.assignee-first{
+    display: flex;
+    flex-direction: column;
+    gap:12px;
+    margin-top:20px
+}
+.assignee-submit{
+    display:flex;
+    gap:24px
+}
+.assignee-list{
+    display: flex;
+    flex-direction: column;
+    gap:8px;
+    margin-top: 12px;
+}
+.time{
+    float:right
+}
+.timeline{
+    width:100%;
+    max-width:320px
+}
+.link-submit{
+    display:flex;
+    gap:12px;
+    flex-direction: column;
+}
+.url{
+    width:60vw;
+    height:49px
+}
+.submit-box{
+    gap:2rem;
+    display: flex;
+}
+.assignee-profile{
+    display: flex;
+    align-items: center;
+    gap:10px
+}
+.assignee-profile-name{
+    display: flex;
+    gap:10px
+}
+.assignee-profile-list{
+    display: flex;
+    flex-direction: column;
+    gap:40px
+}
+.typing{
+    height:54px;
+    width:90vw;
+    margin-top:32px;
+}
+.p-typing{
+    padding-top:8px;
+    padding-bottom: 24px;
+}
+
+
+/* .assignee-p{
+    text-align: left;
+    align-self: stretch;
+} */
