@@ -3,7 +3,7 @@ import bell from "./assets/bell.jpg";
 import check from "./assets/check.jpg";
 import retry from "./assets/retry.jpg";
 import "./assigneeheader.css"
-const AssigneeHeader = () => {
+function AssigneeHeader ()  {
     return (  
     <div className="assignee-nav">
       <Link>

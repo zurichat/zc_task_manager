@@ -1,5 +1,5 @@
 import "./AssigneeOne.css"
-const SubmitDetails = (props) => {
+function SubmitDetails (props) {
     return (  
       <div className="assignee-submit">
         <p className="assignee-title">{props.title}</p>
