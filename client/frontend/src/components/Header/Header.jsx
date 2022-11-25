@@ -4,7 +4,7 @@ import img from "../Header/assets/pic.png"
 import { RiArrowDownSLine } from "react-icons/ri"
 import style from "./Header.module.css"
 
-const Header = ({link}) => {
+const Header = ({ link }) => {
   const [show, setShow] = useState(false)
   const navigate = useNavigate()
   return (
@@ -36,7 +36,13 @@ const Header = ({link}) => {
       </div>
       <div className={style.action_grp}>
         <div className={style.task_notif}>
-          <button className={link==='Task' ? style.assignment__button : style.noAssignment_btn}>
+          <button
+            className={
+              link === "Task"
+                ? style.assignment__button_1
+                : style.noAssignment_btn
+            }
+          >
             <span
               className={style.assignment__p}
               onClick={() => {
@@ -48,28 +54,32 @@ const Header = ({link}) => {
             </span>
             <RiArrowDownSLine
               className={style.assignment__svg}
-              style={{color: '#B0AFB0'}}
+              style={{ color: "#B0AFB0" }}
               onClick={() => setShow(true)}
             />
           </button>
           {show && (
             <button>
-            <ul className={style.assignment__lists}>
-              {["By me", "For me", "Task history"].map((item, index) => (
-                <li key={index} onClick={() => setShow(false)}>
-                  <Link to={`/${item.toLowerCase().replace(" ", "")}`}>
-                    {item}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+              <ul className={style.assignment__lists}>
+                {["By me", "For me", "Task history"].map((item, index) => (
+                  <li key={index} onClick={() => setShow(false)}>
+                    <Link to={`/${item.toLowerCase().replace(" ", "")}`}>
+                      {item}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </button>
           )}
           <button
-          className={link==='notification' ? style.assignment__button : style.noAssignment_btn}
-          onClick={() => navigate("/notification")}
+            className={
+              link === "notification"
+                ? style.assignment__button_1
+                : style.noAssignment_btn
+            }
+            onClick={() => navigate("/notification")}
           >
-          Notification
+            Notification
           </button>
         </div>
         <button
