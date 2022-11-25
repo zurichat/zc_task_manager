@@ -1,0 +1,31 @@
+export default class APIFeatures {
+    constructor(result = null, queryString) {
+        this.result = result;
+        this.queryString = queryString;
+    }
+
+    // filter() {
+    //     if (this.queryString.orderBy) {
+    //         const fields = this.queryString.orderBy.split(" ");
+    //         this.query =  this.query.orderBy(fields[0], fields[1]);
+    //         return this;
+    //     } else {
+    //         this.query = this.query.orderBy("created_at", "desc");
+    //         return this;
+    //     }
+    // }
+
+    paginate () {
+        const page = parseInt(this.queryString.page) || 1;
+        const limit = parseInt(this.queryString.limit) || 10;
+        const skip = (page-1) * limit;
+        let resultCount = this.result.length;
+        let noOfPages = Math.ceil(resultCount/limit);
+        let resultPerPage = this.result.slice(skip, skip+limit);
+        return [
+            page,
+            noOfPages,
+            resultPerPage
+        ];
+    }
+}
