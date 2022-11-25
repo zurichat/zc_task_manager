@@ -1,7 +1,7 @@
 import React from "react"
-import style from "./AssignerTaskAssigned.module.css"
+import style from "./TaskAssigned.module.css"
 
-function AssignerTaskAssigned({ taskMessage, closeModal }) {
+function TaskAssigned({ taskMessage, closeModal }) {
   return (
     <div className={style.container}>
       <div className={style.card}>
@@ -11,7 +11,7 @@ function AssignerTaskAssigned({ taskMessage, closeModal }) {
           or in the medical industry. You can choose between both, each
           application will have it's own constraints so choose carefully. Design
           systems require utmost attention to detail which is why attention to
-          detail will be the most important grading criteria for this task.{" "}
+          detail will be the most important grading criteria for this task.
           <br />
           <br />
           From the way you choose the elements of your design to the way you
@@ -54,4 +54,4 @@ function AssignerTaskAssigned({ taskMessage, closeModal }) {
   )
 }
 
-export default AssignerTaskAssigned
+export default TaskAssigned
