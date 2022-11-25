@@ -1,7 +1,7 @@
 import React from "react"
 import tasks from "./Tasks.json"
 import "./style.css"
-import Header from '../../components/Header/Header'
+import Header from "../../components/Header/Header"
 import { RiArrowDownSLine } from "react-icons/ri"
 
 const TaskHistory = () => {
@@ -11,7 +11,7 @@ const TaskHistory = () => {
     { heading: "Date Created", value: "date" }
   ]
   return (
-    <>
+    <div style={{ width: "100%", padding: "2rem 3rem 1.5rem" }}>
       <Header />
       <div className="task__history">
         <div className="task-history-header">
@@ -34,20 +34,28 @@ const TaskHistory = () => {
               {tasks.map((item, index) => (
                 <tr key={index}>
                   {columns.map((column, index) => {
-                    if (item[`${column.value}`] === 'By me') {
-                      return <td className="task-type-a" key={index}>{item[`${column.value}`]}</td>
+                    if (item[`${column.value}`] === "By me") {
+                      return (
+                        <td className="task-type-a" key={index}>
+                          {item[`${column.value}`]}
+                        </td>
+                      )
                     }
-                    if (item[`${column.value}`] === 'For me') {
-                      return <td className="task-type-b" key={index}>{item[`${column.value}`]}</td>
+                    if (item[`${column.value}`] === "For me") {
+                      return (
+                        <td className="task-type-b" key={index}>
+                          {item[`${column.value}`]}
+                        </td>
+                      )
                     }
 
-                    if (column.value === 'name') {
+                    if (column.value === "name") {
                       return (
-                        <td
-                          key={index}>
+                        <td key={index}>
                           {item[`${column.value}`]}
                           <RiArrowDownSLine className="arrow-svg" />
-                        </td>)
+                        </td>
+                      )
                     }
                     return <td key={index}>{item[`${column.value}`]}</td>
                   })}
@@ -57,10 +65,8 @@ const TaskHistory = () => {
             </tbody>
           </table>
         </div>
-
       </div>
-    </>
-
+    </div>
   )
 }
 

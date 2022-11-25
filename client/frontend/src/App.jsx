@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom"
-import Header from "./components/Header/Header"
 import AssignerNotification from "./components/AssignerNotification/AssignerNotification"
 import TaskAsignedPage from "./Pages/TaskAssigner/TaskAsigned"
 import AddTask from "./Pages/AddTask/AddTask"
