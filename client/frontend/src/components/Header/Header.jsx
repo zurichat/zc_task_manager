@@ -65,7 +65,12 @@ const Header = () => {
           )}
           <p onClick={() => navigate("/notification")}>Notification</p>
         </div>
-        <button className="assignment__button">Create Task</button>
+        <button
+          className="assignment__button"
+          onClick={() => navigate("/addtask")}
+        >
+          Create Task
+        </button>
       </div>
     </header>
   )

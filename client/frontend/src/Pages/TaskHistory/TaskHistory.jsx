@@ -1,7 +1,7 @@
 import React from "react"
 import tasks from "./Tasks.json"
 import "./style.css"
-import Header from "../Header/Header"
+import Header from "../../components/Header/Header"
 
 const TaskHistory = () => {
   const columns = [

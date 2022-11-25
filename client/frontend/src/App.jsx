@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom"
-import TaskAsignedPage from "./components/TaskAsigned/TaskAsigned"
+import TaskAsignedPage from "./Pages/TaskAssigner/TaskAsigned"
 import AddTask from "./Pages/AddTask/AddTask"
-import TaskHistory from "./components/TaskHistory/TaskHistory"
+import TaskHistory from "./Pages/TaskHistory/TaskHistory"
 
 import "./App.css"
 const App = () => {

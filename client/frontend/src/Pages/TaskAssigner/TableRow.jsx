@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { RiArrowDownSLine } from "react-icons/ri"
-import AssignedModal from "../AssignedModal/AssignedModal"
-import AssignerDeleteTask from "../AssignerDeleteTask/AssignerDeleteTask"
+import AssignedModal from "../../components/AssignedModal/AssignedModal"
+import AssignerDeleteTask from "../../components/AssignerDeleteTask/AssignerDeleteTask"
 
 import classes from "./TableRow.module.css"
 
