@@ -90,7 +90,7 @@ export default class HttpRepo {
 
   async create(payloadObject) {
     this.request.payload = payloadObject;
-
+    console.log(this.request.object_id);
     return await this.postReq(this.writeUrl, this.request);
   }
 
@@ -107,6 +107,7 @@ export default class HttpRepo {
 
   async update(objectId, payloadObject) {
     this.request.object_id = objectId;
+    //console.log(object_id)
     this.request.payload = payloadObject;
 
     return await this.putReq(this.writeUrl, this.request);

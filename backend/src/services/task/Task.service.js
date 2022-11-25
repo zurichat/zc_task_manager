@@ -11,6 +11,12 @@ class TaskService extends HttpRepo {
 
     return create;
   }
+
+  async update(params) {
+    const {objectId} = params
+    const updatedTask = await this.repo.update(objectId, params);
+    return updatedTask;
+  }
 }
 
 export default new TaskService();

@@ -14,4 +14,15 @@ export default class TaskController {
       next(error);
     }
   }
+
+  static async update(req, res, next) {
+    try {
+      // Request validation required
+      const result = await taskService.update(req.body);
+
+      return res.send(result?.data);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
