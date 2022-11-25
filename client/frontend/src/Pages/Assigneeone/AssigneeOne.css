@@ -14,9 +14,12 @@
     margin-top: 32px;
     margin-bottom: 64px;
 }
-.assignee-toggle div{
-    margin-inline:24px;
-}
+.assignee-fil {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-right: 0.5rem;
+  }
 .assignee-zuri{
     margin-inline: 24px;
 }
@@ -82,10 +85,57 @@
 .p-typing{
     padding-top:8px;
     padding-bottom: 24px;
+    font-style: italic;
+    color:#B0AFB0
+}
+.add{
+    align-self: flex-end;
+    padding-top: 40px;
+    padding-bottom: 10px;
+}
+.assignee-comment{
+    padding-top:40px;
+    padding-bottom: 24px;
+}
+.assignee-btn{
+    background-color: #00B87C;
+    color:white;
+    width:8vw;
+    border: 0;
+    border-radius: 4px;
+    font-family: "Lato", sans-serif;
+}
+.assignee-frontend{
+    text-decoration: none;
+    color:white;
+    background-color: #D5205B;
+    border-radius: 4px;
+    width:7vw;
+    text-align: center;
+    height:28px;
+}
+.assignee-title{
+    width:20vw;
+    text-align: left;
+    font-weight: 700;
+}
+input::placeholder{
+    padding: 20px;
+    font-family: "Lato", sans-serif;
+}
+.link-submit p{
+    font-weight: 700;   
 }
 
 
-/* .assignee-p{
-    text-align: left;
-    align-self: stretch;
-} */
+@media screen and (max-width:480px) {
+    .assignee-frontend{
+        width:30vw
+    }
+    .assignee-btn{
+        width:20vw
+    }
+    .line{
+        width:75vw
+    }
+}
