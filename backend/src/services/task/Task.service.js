@@ -1,7 +1,8 @@
-import HttpRepo from '../../database/repositories/HttpRepo';
+import HttpRepo from '../../database/repositories/HttpRepo.js';
 
-export default class TaskService extends HttpRepo {
+class TaskService extends HttpRepo {
   constructor() {
+    super();
     this.repo = new HttpRepo();
   }
 
@@ -11,3 +12,5 @@ export default class TaskService extends HttpRepo {
     return create;
   }
 }
+
+export default new TaskService();
