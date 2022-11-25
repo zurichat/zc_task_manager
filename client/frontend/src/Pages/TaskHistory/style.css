@@ -29,6 +29,11 @@
   padding-bottom: 2px;
 }
 
+.filter-modal {
+  position: relative;
+  z-index: 3;
+}
+
 .table-wrapper {
   overflow-x: scroll;
 }
