@@ -14,4 +14,24 @@ export default class TaskController {
       next(error);
     }
   }
+
+  static async getUserTask(req, res, next) {
+    try{
+      const result = await taskService.getUserTask(req.params);
+
+      res.send(result?.data);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async deleteTaskCategory(req, res, next) {
+    try{
+      const result = await taskService.deleteTaskCategory(req.body);
+
+      res.send(result?.data);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
