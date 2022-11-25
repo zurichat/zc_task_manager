@@ -15,6 +15,8 @@ const App = () => {
         <Route path="/notification" element={<AssignerNotification />} />
         <Route path="/addtask" element={<AddTask />} />
         <Route path="/taskhistory" element={<TaskHistory />} />
+        <Route path ="/feature" element ={<AssigneeOne />}/>
+        <Route path="/assignee-task-history" element={<AssigneeTaskHistory />} />
       </Routes>
     </>
   )
