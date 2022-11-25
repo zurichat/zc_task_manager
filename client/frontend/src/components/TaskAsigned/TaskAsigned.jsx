@@ -6,6 +6,7 @@ import "./Taskassigned.css"
 const TaskAsignedPage = () => {
   return (
     <section style={{ width: "100%", padding: "2rem 3rem 1.5rem" }}>
+      <Header />
       <Common />
       <Table />
     </section>
