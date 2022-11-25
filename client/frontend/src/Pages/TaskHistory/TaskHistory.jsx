@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import tasks from "./Tasks.json"
 import "./style.css"
 import Header from "../../components/Header/Header"
@@ -7,6 +7,18 @@ import { CiFilter } from 'react-icons/ci'
 import Filter from "../../components/filter/Filter"
 
 const TaskHistory = () => {
+  const [historyData, setHistoryData] = useState([])
+  const [Loading, setLoading] = useState(true)
+
+  useEffect((() => {
+    fetch('https:/dummydata/history') /* fake api waiting for backend endpoint*/
+      .then((response) => response.json())
+      .then((data) => setHistoryData(data))
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false))
+  }), [])
+
+  /* Once the history endpoint is ready HistoryData will be used to display data instead of tasks json */
 
   const [show, setShow] = useState(false)
 
