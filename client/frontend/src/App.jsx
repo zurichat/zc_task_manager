@@ -6,6 +6,7 @@ import TaskHistory from "./Pages/TaskHistory/TaskHistory"
 import AssigneeTaskHistory from "./Pages/AssigneeTaskHistory/assignee-task-history"
 
 import "./App.css"
+import AssigneeOne from "./Pages/Assigneeone/AssigneeOne"
 const App = () => {
   return (
     <>
@@ -14,9 +15,10 @@ const App = () => {
         <Route path="/notification" element={<AssignerNotification />} />
         <Route path="/addtask" element={<AddTask />} />
         <Route path="/taskhistory" element={<TaskHistory />} />
+        <Route path ="/feature" element ={<AssigneeOne />}/>
         <Route path="/assignee-task-history" element={<AssigneeTaskHistory />} />
       </Routes>
     </>
   )
 }
-export default App
+export default App;

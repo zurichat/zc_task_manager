@@ -3,7 +3,7 @@
   margin: 1rem 0 2rem;
 }
 
-.assignment-details-grp {
+.assignment_details_grp {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -13,13 +13,13 @@
   margin-top: 0.5rem;
 }
 
-.assignment-details {
+.assignment_details {
   display: flex;
   margin: 1rem 0 1.5rem;
   align-items: center;
 }
 
-.assignment-details span {
+.assignment_details span {
   text-align: center;
   margin-right: 1.5rem;
   font-size: 15px;
@@ -34,13 +34,13 @@
   font-weight: 400;
   color: #616061;
 }
-.action-grp {
+.action_grp {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.action-grp .task-notif {
+.action_grp .task_notif {
   display: flex;
   gap: 30px;
   align-items: center;
@@ -56,13 +56,25 @@
   border-radius: 3px;
   padding: 16px 23px;
 }
-.assignment__button-1 {
+.assignment__button{
   padding: 10px 18px;
   background: #00b87c;
   border-radius: 4px 4px 0px 0px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.noAssignment_btn{
+  background-color: white;
+  padding: 10px 18px;
+  border-radius: 4px 4px 0px 0px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color:#B0AFB0;
+  font-size: 15px;
 }
 
 .assignment__p {
@@ -73,9 +85,10 @@
   width: 1.5rem;
   fill: #ffffff;
   cursor: pointer;
+  color: #B0AFB0;
 }
 
-.task-notif {
+.task_notif {
   position: relative;
 }
 .assignment__lists {

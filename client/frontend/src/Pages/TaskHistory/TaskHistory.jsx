@@ -29,7 +29,9 @@ const TaskHistory = () => {
   ]
   return (
     <div style={{ width: "100%", padding: "2rem 3rem 1.5rem" }}>
-      <Header />
+      <Header
+      link='Task'
+      />
       <div className="task__history">
         <div className="task-history-header">
           <h1>Task history</h1>
