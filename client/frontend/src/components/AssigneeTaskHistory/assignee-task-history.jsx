@@ -1,8 +1,7 @@
 import styles from './styles.module.css'
 import ProfileImg1 from './assets/profile1.png'
 import ProfileImg2 from './assets/profile2.png'
-
-
+// import items from './data'
 
 export default function AssigneeTaskHistory() {
     return (
