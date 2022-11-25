@@ -17,6 +17,23 @@
   gap: 40px;
 }
 
+.filter-icon-grp {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #00B87C;
+}
+
+.filter-icon-grp p {
+  border-bottom: 1px solid;
+  padding-bottom: 2px;
+}
+
+.filter-modal {
+  position: relative;
+  z-index: 3;
+}
+
 .table-wrapper {
   overflow-x: scroll;
 }
