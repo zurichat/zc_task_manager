@@ -10,7 +10,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin: 2rem 0;
+  margin: 2rem 0 0;
 }
 .th {
   text-align: left;

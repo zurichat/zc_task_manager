@@ -1,9 +1,12 @@
-import React from "react"
-import { useNavigate } from "react-router-dom"
+import React, { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import img from "../Header/assets/pic.png"
+import { RiArrowDownSLine } from "react-icons/ri"
+
 import "./Header.css"
 
 const Header = () => {
+  const [show, setShow] = useState(false)
   const navigate = useNavigate()
   return (
     <header className="assignment__header">
@@ -34,7 +37,32 @@ const Header = () => {
       </div>
       <div className="action-grp">
         <div className="task-notif">
-          <button className="assignment__button-1">Task Assigned </button>
+          <button className="assignment__button-1">
+            <p
+              className="assignment__p"
+              onClick={() => {
+                navigate("/")
+                setShow(false)
+              }}
+            >
+              Assigned
+            </p>
+            <RiArrowDownSLine
+              className="assignment__svg"
+              onClick={() => setShow(true)}
+            />
+          </button>
+          {show && (
+            <ul className="assignment__lists">
+              {["By me", "For me", "Task history"].map((item, index) => (
+                <li key={index} onClick={() => setShow(false)}>
+                  <Link to={`/${item.toLowerCase().replace(" ", "")}`}>
+                    {item}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
           <p onClick={() => navigate("/notification")}>Notification</p>
         </div>
         <button className="assignment__button">Create Task</button>
