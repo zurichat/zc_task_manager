@@ -14,24 +14,19 @@ export default class TaskController {
   }
 
   static async getAllTask(req, res, next) {
-    let query = {};
-    for (let queryParameter of Object.keys(req.query)) {
-        if (queryParameter === "limit" || 
-        queryParameter === "page");
-        query[queryParameter] = req.query[queryParameter];
-    }
+ 
 
 try {
   // Request validation required
   const result = await taskService.getAllTasks();
-  console.log(result)
   const data = new APIFeatures(result, query).paginate();
 
-  res.send({
-    currentPage: `${data[0]}`,
+  return res.send(result?.data,
+    {currentPage: `${data[0]}`,
     noOfPages: `${data[2]}`,
     data: `${data[3]}`
-  });
+  }
+);
 } catch (error) {
   next(error);
 }
@@ -39,8 +34,9 @@ try {
 
 static async getTaskByMe(req, res, next) {
 try {
+  const user_id = req.params
   // Request validation required
-  const result = await taskService.getTaskByMe();
+  const result = await taskService.getTaskByMe({"task_creator": "user_id"});
 
   res.send({
     ...result,
