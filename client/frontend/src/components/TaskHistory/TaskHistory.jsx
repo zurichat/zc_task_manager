@@ -1,6 +1,7 @@
 import React from "react"
 import tasks from "./Tasks.json"
 import "./style.css"
+import { RiArrowDownSLine } from "react-icons/ri"
 
 const TaskHistory = () => {
   const columns = [
@@ -11,31 +12,49 @@ const TaskHistory = () => {
   return (
     <div className="task__history">
       <div className="task-history-header">
-        <h1 clas>Task history</h1>
+        <h1>Task history</h1>
         <div className="filter">
           <p>Yesterday</p>
           <p>Filter</p>
         </div>
       </div>
-      <table className="table">
-        <thead>
-          <tr>
-            {columns.map((column, index) => (
-              <th key={index}>{column.heading}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {tasks.map((item, index) => (
-            <tr key={index}>
-              {columns.map((column, index) => (
-                <td key={index}>{item[`${column.value}`]}</td>
-              ))}
-              <button className="goto-btn">Go to task</button>
+      <div className="table-wrapper">
+        <table className="table">
+          <thead>
+            <tr>
+              {columns.map((column, index) => {
+                return <th key={index}>{column.heading}</th>
+              })}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody className="tasks-rows">
+            {tasks.map((item, index) => (
+              <tr key={index}>
+                {columns.map((column, index) => {
+                  if (item[`${column.value}`] === 'By me') {
+                    return <td className="task-type-a" key={index}>{item[`${column.value}`]}</td>
+                  }
+                  if (item[`${column.value}`] === 'For me') {
+                    return <td className="task-type-b" key={index}>{item[`${column.value}`]}</td>
+                  }
+
+                  if (column.value === 'name') {
+                    return (
+                      <td
+                        key={index}>
+                        {item[`${column.value}`]}
+                        <RiArrowDownSLine className="arrow-svg" />
+                      </td>)
+                  }
+                  return <td key={index}>{item[`${column.value}`]}</td>
+                })}
+                <button className="goto-btn">Go to task</button>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
     </div>
   )
 }
