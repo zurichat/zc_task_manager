@@ -3,6 +3,7 @@ import tasks from "./Tasks.json"
 import "./style.css"
 import Header from "../../components/Header/Header"
 import { RiArrowDownSLine } from "react-icons/ri"
+import { CiFilter } from 'react-icons/ci'
 
 const TaskHistory = () => {
   const columns = [
@@ -18,7 +19,10 @@ const TaskHistory = () => {
           <h1>Task history</h1>
           <div className="filter">
             <p>Yesterday</p>
-            <p>Filter</p>
+            <span className="filter-icon-grp">
+              <p>Filter</p>
+              <CiFilter />
+            </span>
           </div>
         </div>
         <div className="table-wrapper">
