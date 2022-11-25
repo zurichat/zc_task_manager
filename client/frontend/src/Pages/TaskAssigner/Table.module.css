@@ -1,0 +1,38 @@
+.table {
+  width: 100%;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  color: #616061;
+}
+
+.tr {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 0 0;
+}
+.th {
+  text-align: left;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  color: #1d1c1d;
+}
+.th1 {
+  flex-basis: 30%;
+}
+.th2 {
+  flex-basis: 10%;
+}
+
+.th3 {
+  flex-basis: 10%;
+}
+.th4 {
+  flex-basis: 7%;
+}
+
+.th5 {
+  flex-basis: 8%;
+}

@@ -1,0 +1,62 @@
+.task {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "Lato";
+  font-style: normal;
+  margin-bottom: 1rem;
+}
+
+.left {
+  flex-basis: 10%;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 28px;
+  color: #1d1c1d;
+}
+
+.right {
+  flex-basis: 20%;
+  display: flex;
+  justify-content: space-between;
+}
+.yes {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  color: #616061;
+}
+
+.fil {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.p {
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 24px;
+  padding-bottom: 0.01px;
+  border-bottom: 1.2px solid #00b87c;
+  color: #00b87c;
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+.svg {
+  height: 2rem;
+  width: 2rem;
+  fill: #00b87c;
+}
+
+.div {
+  position: absolute;
+  bottom: -110%;
+  right: 15%;
+  background: #ffffff;
+  box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
+  border-radius: 0.2rem;
+  padding: 1rem 1.5rem;
+  list-style: none;
+  z-index: 50;
+  width: 160px;
+}
