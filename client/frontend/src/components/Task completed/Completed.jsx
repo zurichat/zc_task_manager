@@ -1,7 +1,7 @@
 import React from 'react'
 import check from '../Task completed/check.svg'
 import '../Task completed/completed.css'
-const Completed = () => {
+const Completed = ({closeModal}) => {
   return (
     <div className='completed-modal'>
         <img src={check} alt="" />
@@ -13,7 +13,7 @@ const Completed = () => {
             <button className="completed-edit">
             Edit Submission
             </button>
-            <button className="completed-submit">
+            <button className="completed-submit" onClick={closeModal}>
             Continue
             </button>
         </div>
