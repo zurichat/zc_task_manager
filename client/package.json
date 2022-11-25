@@ -7,7 +7,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "start": "serve dist/ -p 9001",
+    "start": "serve dist/zuri-task-manager.js -p 9001",
     "open": "opener http://localhost:9010",
     "dev:root": "yarn --cwd root-config dev",
     "dev:task-manager": "yarn --cwd frontend dev",
