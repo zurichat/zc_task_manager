@@ -10,7 +10,8 @@ export default class HttpRepo {
 
   collectionName = '';
 
-  readUrl = `${this.url}/data/read/${this.pluginId}/${this.collectionName}/${this.organizationId}`;
+  // readUrl = `${this.url}/data/read/${this.pluginId}/${this.collectionName}/${this.organizationId}`;
+  readUrl = `${this.url}/data/read`;
 
   writeUrl = `${this.url}/data/write`;
 
