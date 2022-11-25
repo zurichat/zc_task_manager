@@ -23,6 +23,11 @@ export default class TaskController {
       };
       console.log(data);
       const result = await taskService.submitTask(data);
+
+    } catch (error) {
+      next(error);
+    }
+  }
   static async getAllTask(req, res, next) {
  
 
@@ -61,11 +66,12 @@ try {
   // Request validation required
   const result = await taskService.createTaskCategory(req.body);
 
-  return res.send(result?.data  );
+  return res.send(result?.data);
 } catch (error) {
   next(error);
 }
 }
+
   static async assign(req, res, next) {
     try {
       // Request validation required
@@ -104,7 +110,7 @@ try {
 
   static async deleteTaskCategory(req, res, next) {
     try{
-      const result = await taskService.deleteTaskCategory(req.body);
+      const result = await taskService.deleteTaskCategory(req.params);
 
       res.send(result?.data);
     } catch (error) {

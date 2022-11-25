@@ -53,10 +53,11 @@ class TaskService extends HttpRepo {
   }
 
   async deleteTaskCategory(params) {
-    const deleteTask = await this.repo.delete(params);
+    const deleteTask = await this.repo.delete({object_id: params.category_id});
 
     return deleteTask;
   }
+
   async submitTask(data) {
     const collectionName = 'submissions';
 

@@ -68,7 +68,7 @@ export default class HttpRepo {
   }
 
   async getUserTask(params) {
-    this.request.payload =  params;
+    this.request =  params;
 
     return await this.getReq(this.readUrl, this.request);
   }
