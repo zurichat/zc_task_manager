@@ -20,7 +20,7 @@ class TaskService extends HttpRepo {
   }
 
   async getTaskByMe(params) {
-    const get = await this.repo.findWithFilter(params);
+    const get = await this.repo.findWhere(params);
     if (!get) throw new NotFoundError("An error occured while fetching tasks");
 
     return get;
