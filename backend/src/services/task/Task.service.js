@@ -8,8 +8,13 @@ class TaskService extends HttpRepo {
 
   async create(params) {
     const create = await this.repo.create(params);
-
     return create;
+  }
+
+  async remove(params) {
+    const { objectId } = params;
+    const remove = await this.repo.delete(objectId);
+    return remove;
   }
 }
 

@@ -10,9 +10,16 @@ export default class HttpRepo {
 
   collectionName = '';
 
+  headers = {
+    'Content-type': 'application/json',
+    accept: 'application/json',
+    Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb29raWUiOiJNVFkyT1RNek5EVTBPWHhIZDNkQlIwUlplazlFUVhkT2FrVXhUbXBCZUZreVZYcGFiVTB4V2tkTk0wMHlSVEJaVVQwOWZLTEF3cUV6aXh4UmliM3o3R1ZKQkJxWkkwRS1FMkx2dFdSRjVCeGNoMFkwIiwiZW1haWwiOiJhYnJhaGFtdGVyYWhkZWJpa0BnbWFpbC5jb20iLCJpZCI6IjYzODAwNjE1NjAxY2UzZmM1ZGM3M2E0YSIsIm9wdGlvbnMiOnsiUGF0aCI6Ii8iLCJEb21haW4iOiIiLCJNYXhBZ2UiOjc5NzU4MjcyNzYsIlNlY3VyZSI6ZmFsc2UsIkh0dHBPbmx5IjpmYWxzZSwiU2FtZVNpdGUiOjB9LCJzZXNzaW9uX25hbWUiOiJmNjgyMmFmOTRlMjliYTExMmJlMzEwZDNhZjQ1ZDVjNyJ9.MwO-NEeu9NA6YVk6P9_UbJn7hrW7CvhzfZ9hfM0yukM`,
+  };
+
   readUrl = `${this.url}/data/read/${this.pluginId}/${this.collectionName}/${this.organizationId}`;
 
   writeUrl = `${this.url}/data/write`;
+  _deleteUrl = `${this.url}/data/delete`;
 
   constructor(collectionName = 'task', organizationId = '61db3b27eba8adb50ca1399b') {
     this.collectionName = collectionName;
@@ -62,16 +69,15 @@ export default class HttpRepo {
     if (Object.keys(config).length === 0) {
       return axios.get(url);
     }
-    return axios.get(url, config);
+    return axios.post(url, config);
   }
 
   async deleteReq(url, data) {
-    return axios.delete(url, data);
+    return axios.post(url, data);
   }
 
   async findAll() {
-    const result = await this.getReq(this.readUrl);
-
+    const result = await this.getReq(this.writeUrl, this.request);
     return result;
   }
 
@@ -82,7 +88,6 @@ export default class HttpRepo {
 
     return result;
   }
-
   async findFirst() {
     const result = await axios.get(this.readUrl);
     return result.data['data'][0];
@@ -114,8 +119,7 @@ export default class HttpRepo {
 
   async delete(objectId) {
     this.request.object_id = objectId;
-
-    return await this.deleteReq(this.writeUrl, this.request);
+    return await this.deleteReq(this._deleteUrl, this.request);
   }
 
   async findWorkSpaceUsers(bearerToken) {

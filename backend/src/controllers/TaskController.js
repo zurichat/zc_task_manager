@@ -14,4 +14,28 @@ export default class TaskController {
       next(error);
     }
   }
+
+  static async remove(req, res, next) {
+    try {
+      // Request validation required
+
+      const result = await taskService.remove(req.body);
+      console.log(result.data);
+      return res.send(result?.data);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async getTaskHistory(req, res, next) {
+    try {
+      // Request validation required
+
+      const result = await taskService.history();
+      console.log(result);
+      return res.send(result?.data);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
