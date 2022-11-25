@@ -7,7 +7,7 @@ export default class TaskController {
 
       const result = await taskService.create(req.body);
 
-      return res.send(result?.data);
+      return res.send(result.data);
     } catch (error) {
       next(error);
     }
@@ -19,13 +19,13 @@ export default class TaskController {
 try {
   // Request validation required
   const result = await taskService.getAllTasks();
-  const data = new APIFeatures(result, query).paginate();
+  // const data = new APIFeatures(result, query).paginate();
 
   return res.send(result?.data,
-    {currentPage: `${data[0]}`,
-    noOfPages: `${data[2]}`,
-    data: `${data[3]}`
-  }
+  //   {currentPage: `${data[0]}`,
+  //   noOfPages: `${data[2]}`,
+  //   data: `${data[3]}`
+  // }
 );
 } catch (error) {
   next(error);
@@ -34,13 +34,13 @@ try {
 
 static async getTaskByMe(req, res, next) {
 try {
-  const user_id = req.params
+  const user_id = req.params;
   // Request validation required
-  const result = await taskService.getTaskByMe({"task_creator": "user_id"});
+  const result = await taskService.getTaskByMe({"assignee": `${user_id}`});
 
-  res.send({
-    ...result,
-  });
+  res.send(
+    result.data
+);
 } catch (error) {
   next(error);
 }
