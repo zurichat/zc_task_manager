@@ -1,5 +1,6 @@
 .assignee-toggle-one{
     display: flex;
+    margin-inline: 2vw;
     /* width:20vw; */
     border: 1px solid #024E35;
 border-radius: 50px;
