@@ -6,7 +6,7 @@ const Completed = () => {
     <div className='completed-modal'>
         <img src={check} alt="" />
         <div className="completed-text">
-            <span big-Completed-text>Task Completed</span>
+            <span className='big-completed-text'>Task Completed</span>
             <span>Your “Design System for Mixed Reality Applications” tasks has been submitted</span>
         </div>
         <div className="completed-buttons">
