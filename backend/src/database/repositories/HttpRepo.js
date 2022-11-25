@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 import axios from 'axios';
 
 export default class HttpRepo {
@@ -6,20 +5,15 @@ export default class HttpRepo {
 
   pluginId = '637d8ecf82bf004233def988';
 
-  organizationId = '';
+  // organizationId = '61db3b27eba8adb50ca1399b';
 
-  collectionName = '';
+  // collectionName = 'task';
 
-  headers = {
-    'Content-type': 'application/json',
-    accept: 'application/json',
-    Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb29raWUiOiJNVFkyT1RNek5EVTBPWHhIZDNkQlIwUlplazlFUVhkT2FrVXhUbXBCZUZreVZYcGFiVTB4V2tkTk0wMHlSVEJaVVQwOWZLTEF3cUV6aXh4UmliM3o3R1ZKQkJxWkkwRS1FMkx2dFdSRjVCeGNoMFkwIiwiZW1haWwiOiJhYnJhaGFtdGVyYWhkZWJpa0BnbWFpbC5jb20iLCJpZCI6IjYzODAwNjE1NjAxY2UzZmM1ZGM3M2E0YSIsIm9wdGlvbnMiOnsiUGF0aCI6Ii8iLCJEb21haW4iOiIiLCJNYXhBZ2UiOjc5NzU4MjcyNzYsIlNlY3VyZSI6ZmFsc2UsIkh0dHBPbmx5IjpmYWxzZSwiU2FtZVNpdGUiOjB9LCJzZXNzaW9uX25hbWUiOiJmNjgyMmFmOTRlMjliYTExMmJlMzEwZDNhZjQ1ZDVjNyJ9.MwO-NEeu9NA6YVk6P9_UbJn7hrW7CvhzfZ9hfM0yukM`,
-  };
+  // readUrl = `${this.url}/data/read/${this.pluginId}/${this.collectionName}/${this.organizationId}`;
 
-  readUrl = `${this.url}/data/read/${this.pluginId}/${this.collectionName}/${this.organizationId}`;
-
+  readUrl = `${this.url}/data/read`;
   writeUrl = `${this.url}/data/write`;
-  _deleteUrl = `${this.url}/data/delete`;
+  deleteUrl = `${this.url}/data/delete`;
 
   constructor(collectionName = 'task', organizationId = '61db3b27eba8adb50ca1399b') {
     this.collectionName = collectionName;
@@ -35,12 +29,13 @@ export default class HttpRepo {
       payload: {},
     };
   }
+  _readUrl = `${this.url}/data/read/${this.pluginId}/${this.collectionName}/${this.organizationId}`;
 
   buildQueryStr(whereObject) {
     const queryStr = '';
     const whereKey = Object.keys(whereObject);
 
-    if (whereKey.length) {
+    if (whereKey.length === 0) {
       return '';
     }
 
@@ -51,7 +46,7 @@ export default class HttpRepo {
       queryStr = `${key}=${whereValue[index]}&`;
     });
 
-    return queryStr.trimEnd('&');
+    return queryStr.slice(0, -1);
   }
 
   async postReq(url, data, config = {}) {
@@ -69,25 +64,46 @@ export default class HttpRepo {
     if (Object.keys(config).length === 0) {
       return axios.get(url);
     }
-    return axios.post(url, config);
+    return await (
+      await axios.post(url, config)
+    ).data;
   }
 
-  async deleteReq(url, data) {
-    return axios.post(url, JSON.stringify(data));
+  async deleteReq(url, data = {}) {
+    return await (
+      await axios.post(url, data)
+    ).data;
   }
 
   async findAll() {
-    const result = await this.getReq(this.readUrl, this.request);
+    const { organization_id, plugin_id, collection_name } = this.request;
+    const result = await this.getReq(this.readUrl, {
+      organization_id,
+      plugin_id,
+      collection_name,
+    });
     return result;
+  }
+
+  async findSubmitted() {
+    const collectionName = 'submissions';
+    this.request = { ...this.request, collection_name: collectionName };
+    const { collection_name, plugin_id, organization_id } = this.request;
+    const submission = await this.getReq(this.readUrl, {
+      collection_name,
+      organization_id,
+      plugin_id,
+    });
+    return submission;
   }
 
   async findWhere(whereObject = {}) {
     const whereStr = this.buildQueryStr(whereObject);
 
-    const result = await this.getReq(`${this.readUrl}?${whereStr}`);
-
+    const result = await this.get(`${this.readUrl}?${whereStr}`);
     return result;
   }
+
   async findFirst() {
     const result = await axios.get(this.readUrl);
     return result.data['data'][0];
@@ -119,7 +135,8 @@ export default class HttpRepo {
 
   async delete(objectId) {
     this.request.object_id = objectId;
-    return await this.deleteReq(this._deleteUrl, this.request);
+    const result = await this.deleteReq(this.deleteUrl, this.request);
+    return result;
   }
 
   async findWorkSpaceUsers(bearerToken) {

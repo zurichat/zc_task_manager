@@ -14,12 +14,19 @@ class TaskService extends HttpRepo {
   async remove(params) {
     const { objectId } = params;
     const remove = await this.repo.delete(objectId);
-    return remove;
+    return remove.data;
+  }
+
+  async getSubmittedTask() {
+    const submitted = await this.repo.findSubmitted();
+    return submitted;
   }
   async history() {
-    const tasks = await this.repo.findAll();
-    const history = tasks.map((task) => task.submitted === true);
-    return history;
+    const result = await this.repo.findAll();
+    const submitted = await this.getSubmittedTask();
+    const tasks = result?.data;
+    const history = tasks.filter((task) => task.submitted === true);
+    return { history, submitted };
   }
 }
 

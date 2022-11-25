@@ -18,10 +18,9 @@ export default class TaskController {
   static async remove(req, res, next) {
     try {
       // Request validation required
-
       const result = await taskService.remove(req.body);
-      console.log(result.data);
-      return res.send(result?.data);
+      //   console.log(result);
+      //   return res.send(result);
     } catch (error) {
       next(error);
     }
@@ -31,7 +30,7 @@ export default class TaskController {
     try {
       // Request validation required
       const result = await taskService.history();
-      return res.send(result?.data);
+      return res.send(result);
     } catch (error) {
       next(error);
     }
