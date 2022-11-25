@@ -4,6 +4,7 @@ import style from "./AssignerDeleteTask.module.css"
 function AssignerDeleteTask({ onDelete, closeModal }) {
   return (
     <div className={style.container}>
+      <div onClick={closeModal} className={style.dark_overlay}></div>
       <div className={style.card}>
         <button onClick={closeModal} className={style.close_btn}>
           <svg

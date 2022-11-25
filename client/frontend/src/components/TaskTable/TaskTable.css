@@ -1,0 +1,32 @@
+table {
+    border-spacing: 30px;
+}
+
+th, td {
+    /* border: 1px solid black;
+    border-collapse: collapse; */
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    text-align: left;
+}
+
+th {
+    color: #1D1C1D;
+}
+
+td {
+    font-family: 'Lato';
+    font-style: normal;
+    color: #616061;
+}
+
+.submission {
+    color: #25B0FF;
+}
+
+.danger {
+    color: #F40101;
+}
