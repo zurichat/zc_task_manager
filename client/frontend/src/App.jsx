@@ -7,7 +7,6 @@ import "./App.css"
 const App = () => {
   return (
     <>
-      <Header />
       <Routes>
         <Route path="/" element={<TaskAsignedPage />} />
         <Route path="/notification" element={<div>Notification</div>} />
