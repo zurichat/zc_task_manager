@@ -1,0 +1,55 @@
+.tr {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 0;
+}
+
+.td {
+  text-align: left;
+}
+.td1 {
+  flex-basis: 30%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.p {
+  margin-right: 1.5rem;
+}
+.svg {
+  height: 1.5rem;
+  width: 1.5rem;
+  fill: #616061;
+  cursor: pointer;
+}
+.td2 {
+  flex-basis: 10%;
+}
+
+.td3 {
+  flex-basis: 10%;
+}
+.td4 {
+  flex-basis: 5%;
+}
+
+.td5 {
+  flex-basis: 10%;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 24px;
+  padding-bottom: 0.01px;
+}
+.a {
+  border-bottom: 1.2px solid #25b0ff;
+  color: #25b0ff;
+  cursor: pointer;
+}
+.b {
+  border-bottom: 1.2px solid #f40101;
+  color: #f40101;
+  cursor: pointer;
+}
