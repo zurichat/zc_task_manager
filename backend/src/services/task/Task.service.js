@@ -17,7 +17,8 @@ class TaskService extends HttpRepo {
     return remove;
   }
   async history() {
-    const history = await this.repo.findAll();
+    const tasks = await this.repo.findAll();
+    const history = tasks.map((task) => task.submitted === true);
     return history;
   }
 }
