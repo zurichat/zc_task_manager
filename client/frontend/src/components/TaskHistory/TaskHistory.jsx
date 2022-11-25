@@ -9,7 +9,7 @@ const TaskHistory = () => {
     { heading: "Date Created", value: "date" }
   ]
   return (
-    <div className="task-history">
+    <div className="task__history">
       <div className="task-history-header">
         <h1 clas>Task history</h1>
         <div className="filter">
