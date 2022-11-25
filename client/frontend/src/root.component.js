@@ -1,14 +1,10 @@
-import Header from "./components/Header/Header";
-import TaskHistory from './components/TaskHistory/TaskHistory'
-import TaskTable from './components/TaskTable/TaskTable';
+import { BrowserRouter } from "react-router-dom"
+import App from "./App"
 
 export default function Root() {
   return (
-    <>
-      <Header />
-      <TaskHistory />
-      <TaskTable />
-    </>
-
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   )
 }
