@@ -12,8 +12,10 @@ import classes from "../TaskAssigner/Common.module.css";
 import add from "./assets/add.jpg"
 import AssigneeHeader from "../../components/Assignee-header/header";
 import AssigneeToggle from "../../components/AssigneeActive/AssigneeToggle";
+import Completed from "../../components/Task completed/Completed"
 function AsssigneeOne() {
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false);
+  const [open , setOpen] = useState(false)
     return (  
         <>
         <div className="assignee-body">
@@ -54,7 +56,8 @@ function AsssigneeOne() {
                 <p>Link to Submission </p>
                 <div className="submit-box">
                   <input type="url" className="url" placeholder="Enter Link here"/>
-                  <button className="assignee-btn">Submit</button>
+                  <button className="assignee-btn" onClick={() => setOpen(true)}>Submit</button>
+                  {open && <Completed closeModal={() => setOpen(false)} />}
                 </div>
                 <img src={add} alt="" className="add" />
               </div>

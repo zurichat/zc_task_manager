@@ -1,5 +1,5 @@
 import "./AssigneeOne.css"
-const AssigneeProfile = (props) => {
+function AssigneeProfile (props) {
     return (  
       <div className="assignee-profile">
         <img src={props.img} alt="" />

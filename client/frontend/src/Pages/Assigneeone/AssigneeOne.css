@@ -138,4 +138,7 @@ input::placeholder{
     .line{
         width:75vw
     }
+    .assignee-btn{
+        padding:2vw
+    }
 }
