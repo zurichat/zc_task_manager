@@ -1,9 +1,10 @@
-import TaskAsignedPage from "./components/TaskAsigned/TaskAsigned"
+import { BrowserRouter } from "react-router-dom"
+import App from "./App"
 
 export default function Root() {
   return (
-    <>
-      <TaskAsignedPage />
-    </>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   )
 }
