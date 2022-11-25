@@ -2,58 +2,59 @@ import React, { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import img from "../Header/assets/pic.png"
 import { RiArrowDownSLine } from "react-icons/ri"
+import style from "./Header.module.css"
 
-import "./Header.css"
-
-const Header = () => {
+const Header = ({link}) => {
   const [show, setShow] = useState(false)
   const navigate = useNavigate()
   return (
-    <header className="assignment__header">
-      <div className="profile">
+    <header className={style.assignment__header}>
+      <div className={style.profile}>
         <img src={img} alt="" />
-        <p className="design__mentor">Design mentor</p>
+        <p className={style.design__mentor}>Design mentor</p>
       </div>
-      <div className="assignment-details-grp">
-        <div className="assignment-details">
+      <div className={style.assignment_details_grp}>
+        <div className={style.assignment_details}>
           <span>
-            <p className="assigned_number">09</p>
-            <p className="assigned_title">Task Assigned</p>
+            <p className={style.assigned_number}>09</p>
+            <p className={style.assigned_title}>Task Assigned</p>
           </span>
           <span>
-            <p className="assigned_number">05</p>
-            <p className="assigned_title">Admin tasks</p>
+            <p className={style.assigned_number}>05</p>
+            <p className={style.assigned_title}>Admin tasks</p>
           </span>
           <span>
-            <p className="assigned_number">24</p>
-            <p className="assigned_title">Assignees</p>
+            <p className={style.assigned_number}>24</p>
+            <p className={style.assigned_title}>Assignees</p>
           </span>
           <span>
-            <p className="assigned_number">13</p>
-            <p className="assigned_title">Notification</p>
+            <p className={style.assigned_number}>13</p>
+            <p className={style.assigned_title}>Notification</p>
           </span>
         </div>
         <p>6th december, 2022</p>
       </div>
-      <div className="action-grp">
-        <div className="task-notif">
-          <button className="assignment__button-1">
-            <p
-              className="assignment__p"
+      <div className={style.action_grp}>
+        <div className={style.task_notif}>
+          <button className={link==='Task' ? style.assignment__button : style.noAssignment_btn}>
+            <span
+              className={style.assignment__p}
               onClick={() => {
                 navigate("/")
                 setShow(false)
               }}
             >
-              Assigned
-            </p>
+              Assigned Task
+            </span>
             <RiArrowDownSLine
-              className="assignment__svg"
+              className={style.assignment__svg}
+              style={{color: '#B0AFB0'}}
               onClick={() => setShow(true)}
             />
           </button>
           {show && (
-            <ul className="assignment__lists">
+            <button>
+            <ul className={style.assignment__lists}>
               {["By me", "For me", "Task history"].map((item, index) => (
                 <li key={index} onClick={() => setShow(false)}>
                   <Link to={`/${item.toLowerCase().replace(" ", "")}`}>
@@ -62,11 +63,17 @@ const Header = () => {
                 </li>
               ))}
             </ul>
+            </button>
           )}
-          <p onClick={() => navigate("/notification")}>Notification</p>
+          <button
+          className={link==='notification' ? style.assignment__button : style.noAssignment_btn}
+          onClick={() => navigate("/notification")}
+          >
+          Notification
+          </button>
         </div>
         <button
-          className="assignment__button"
+          className={style.assignment__button}
           onClick={() => navigate("/addtask")}
         >
           Create Task
