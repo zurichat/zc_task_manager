@@ -1,5 +1,6 @@
 .assignment__header {
-  padding: 2rem 3rem 1.5rem;
+  width: 100%;
+  margin: 1rem 0 2rem;
 }
 
 .assignment-details-grp {
@@ -53,10 +54,51 @@
 
 .assignment__button {
   border-radius: 3px;
-  padding: 16px 20px;
+  padding: 16px 23px;
 }
 .assignment__button-1 {
-  padding: 12px 18px;
+  padding: 10px 18px;
   background: #00b87c;
   border-radius: 4px 4px 0px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.assignment__p {
+  margin-right: 1.5rem;
+}
+.assignment__svg {
+  height: 1.5rem;
+  width: 1.5rem;
+  fill: #ffffff;
+  cursor: pointer;
+}
+
+.task-notif {
+  position: relative;
+}
+.assignment__lists {
+  position: absolute;
+  top: 90%;
+  left: 5%;
+  background: #ffffff;
+  box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
+  border-radius: 0.2rem;
+  padding: 1rem 1.5rem;
+  list-style: none;
+  z-index: 50;
+  width: 160px;
+}
+.assignment__lists li {
+  padding: 0.5rem 0;
+  border-bottom: 0.1px solid #f2eeeed2;
+}
+.assignment__lists li a:link,
+.assignment__lists li a:visited {
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 15px;
+  color: #2b2b2b;
+  padding: 1rem 0;
 }
