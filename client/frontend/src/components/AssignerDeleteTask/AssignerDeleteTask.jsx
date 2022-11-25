@@ -1,11 +1,11 @@
 import React from "react"
 import style from "./AssignerDeleteTask.module.css"
 
-function AssignerDeleteTask({ onDelete, close_modal }) {
+function AssignerDeleteTask({ onDelete, close_Modal }) {
   return (
     <div className={style.container}>
       <div className={style.card}>
-        <button onClick={close_modal} className={style.close_btn}>
+        <button onClick={close_Modal} className={style.close_btn}>
           <svg
             width="31"
             height="31"
