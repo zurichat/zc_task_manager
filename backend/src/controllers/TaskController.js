@@ -1,17 +1,15 @@
-import TaskService from '../services/task/Task.service';
+// import TaskService from '../ser/vices/task/Task.service.js';
+
+import taskService from '../services/task/Task.service.js';
 
 export default class TaskController {
-  constructor() {
-    this.taskService = new TaskService();
-  }
   static async create(req, res, next) {
     try {
       // Request validation required
-      const result = await this.taskService.create(req.body);
 
-      res.send({
-        ...result,
-      });
+      const result = await taskService.create(req.body);
+
+      return res.send(result?.data);
     } catch (error) {
       next(error);
     }

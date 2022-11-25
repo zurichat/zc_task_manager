@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 export default class HttpRepo {
-  url = 'https://api.zuri.chat/';
+  url = 'https://api.zuri.chat';
 
   pluginId = '637d8ecf82bf004233def988';
 
@@ -14,7 +14,7 @@ export default class HttpRepo {
 
   writeUrl = `${this.url}/data/write`;
 
-  constructor(collectionName = 'task', organizationId = '12345678') {
+  constructor(collectionName = 'task', organizationId = '61db3b27eba8adb50ca1399b') {
     this.collectionName = collectionName;
     this.organizationId = organizationId;
 
@@ -40,8 +40,8 @@ export default class HttpRepo {
     // eslint-disable-next-line linebreak-style
     const whereValue = Object.values(whereObject);
 
-    whereKey.forEach((key) => {
-      queryStr = `${key}=${whereValue[key]}&`;
+    whereKey.forEach((key, index) => {
+      queryStr = `${key}=${whereValue[index]}&`;
     });
 
     return queryStr.trimEnd('&');
@@ -98,7 +98,11 @@ export default class HttpRepo {
     this.request.object_id = objectId;
     this.request.payload = payloadObject;
 
-    return await this.postReq(this.writeUrl, this.request);
+    return await this.postReq(this.writeUrl, this.request, {
+      'Content-type': 'application/json',
+      accept: 'application/json',
+      Authorization: `bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb29raWUiOiJNVFkyT1RNek5EVTBPWHhIZDNkQlIwUlplazlFUVhkT2FrVXhUbXBCZUZreVZYcGFiVTB4V2tkTk0wMHlSVEJaVVQwOWZLTEF3cUV6aXh4UmliM3o3R1ZKQkJxWkkwRS1FMkx2dFdSRjVCeGNoMFkwIiwiZW1haWwiOiJhYnJhaGFtdGVyYWhkZWJpa0BnbWFpbC5jb20iLCJpZCI6IjYzODAwNjE1NjAxY2UzZmM1ZGM3M2E0YSIsIm9wdGlvbnMiOnsiUGF0aCI6Ii8iLCJEb21haW4iOiIiLCJNYXhBZ2UiOjc5NzU4MjcyNzYsIlNlY3VyZSI6ZmFsc2UsIkh0dHBPbmx5IjpmYWxzZSwiU2FtZVNpdGUiOjB9LCJzZXNzaW9uX25hbWUiOiJmNjgyMmFmOTRlMjliYTExMmJlMzEwZDNhZjQ1ZDVjNyJ9.MwO-NEeu9NA6YVk6P9_UbJn7hrW7CvhzfZ9hfM0yukM`,
+    });
   }
 
   async update(objectId, payloadObject) {
