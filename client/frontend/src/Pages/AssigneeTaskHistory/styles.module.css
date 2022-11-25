@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.cont {
+  margin: 32px 16px;
+  font-family: 'Lato', sans-serif;
+}
+
+.history__title {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 28px;
+  color: #333333;
+}
+
+.history__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 12px 24px;
+  gap: 12px;
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
+}
+
+.label {
+  padding: 0px 8px;
+  gap: 8px;
+  background: #a2ddff;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 28px;
+  color: #333333;
+}
+
+.para {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 28px;
+  color: #000000;
+}
+
+.status__section {
+  margin: 12px 0;
+}
+
+.status__text {
+    display: flex;
+}
+
+
+.status__text span {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 28px;
+  color: #000000;
+  margin-right: 30px;
+  width: 120px;
+}
+
+
+.status__text h6 {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 28px;
+  color: #000000;
+}
+
+
+.status__section .status__bar {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+  margin-top: 10px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  color: #000000;
+}
+
+.status__bar span {
+    display: flex;
+  }
+
+.status__section .status__active {
+  width: 320px;
+  border-radius: 24px;
+  border: 4px solid #f40101;
+}
+
+.hr__rule {
+  border: 1px solid #e6e6e6;
+  margin: 12px 0 36px;
+  width: 100%;
+}
+
+.comment__section {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment__section h4 {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+  color: #000000;
+  margin-bottom: 24px;
+}
+
+.comments__profile {
+  display: flex;
+  margin-bottom: 24px;
+}
+
+.comments__profile img {
+  height: 36px;
+  width: 36px;
+  margin-right: 10px;
+}
+
+.comments__profile h5 {
+  font-weight: 900;
+  font-size: 15px;
+  line-height: 18px;
+  color: #1d1c1d;
+}
+
+.comments__profile .comment__time {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  color: #616061;
+}

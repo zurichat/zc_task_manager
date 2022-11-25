@@ -1,10 +1,15 @@
-import React from "react"
+import React, { useState } from "react"
 import tasks from "./Tasks.json"
 import "./style.css"
 import Header from "../../components/Header/Header"
 import { RiArrowDownSLine } from "react-icons/ri"
+import { CiFilter } from 'react-icons/ci'
+import Filter from "../../components/filter/Filter"
 
 const TaskHistory = () => {
+
+  const [show, setShow] = useState(false)
+
   const columns = [
     { heading: "Task Name", value: "name" },
     { heading: "Task type", value: "type" },
@@ -12,13 +17,25 @@ const TaskHistory = () => {
   ]
   return (
     <div style={{ width: "100%", padding: "2rem 3rem 1.5rem" }}>
-      <Header />
+      <Header
+      link='Task'
+      />
       <div className="task__history">
         <div className="task-history-header">
           <h1>Task history</h1>
           <div className="filter">
             <p>Yesterday</p>
-            <p>Filter</p>
+            <span
+              onClick={() => setShow(prev => !prev)}
+              className="filter-icon-grp">
+              <p>Filter</p>
+              <CiFilter />
+            </span>
+            {show && (
+              <div className='filter-modal'>
+                <Filter closeModal={() => setShow(false)} />
+              </div>
+            )}
           </div>
         </div>
         <div className="table-wrapper">
