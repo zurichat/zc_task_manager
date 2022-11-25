@@ -1,9 +1,10 @@
 import React from "react"
-import style from "./TaskAssigned.module.css"
+import style from "./AssignedModal.module.css"
 
-function TaskAssigned({ taskMessage, closeModal }) {
+function AssignedModal({ taskMessage, closeModal }) {
   return (
     <div className={style.container}>
+      <div onClick={closeModal} className={style.dark_overlay}></div>
       <div className={style.card}>
         <p>
           An agency has just hired you to make a design system for mixed reality
@@ -54,4 +55,4 @@ function TaskAssigned({ taskMessage, closeModal }) {
   )
 }
 
-export default TaskAssigned
+export default AssignedModal
