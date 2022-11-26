@@ -1,4 +1,5 @@
 import taskService from '../services/task/Task.service.js';
+import { paginate } from '../utils/APIfeatures.js';
 
 export default class TaskController {
   static async create(req, res, next) {
@@ -14,19 +15,19 @@ export default class TaskController {
   }
 
   static async getAllTask(req, res, next) {
- 
 
 try {
   // Request validation required
   const result = await taskService.getAllTasks();
-  // const data = new APIFeatures(result, query).paginate();
+  const data = paginate(result?.data.data, req.query);
 
-  return res.send(result?.data,
-  //   {currentPage: `${data[0]}`,
-  //   noOfPages: `${data[2]}`,
-  //   data: `${data[3]}`
-  // }
-);
+  return res.status(200).send({
+    message: "Tasks returned successfully",
+    total_pages: data.no_of_pages,
+    current_page: data.page,
+    page_limit: data.limit,
+    data: data.result
+  })
 } catch (error) {
   next(error);
 }
@@ -34,9 +35,10 @@ try {
 
 static async getTaskByMe(req, res, next) {
 try {
-  const user_id = req.params;
+  const { user_id } = req.params;
+
   // Request validation required
-  const result = await taskService.getTaskByMe({"assignee": `${user_id}`});
+  const result = await taskService.getTaskByMe({ assignee: user_id });
 
   res.send(
     result.data
@@ -51,11 +53,12 @@ try {
   // Request validation required
   const result = await taskService.createTaskCategory(req.body);
 
-  return res.send(result?.data  );
+  return res.send(result?.data);
 } catch (error) {
   next(error);
 }
 }
+
   static async assign(req, res, next) {
     try {
       // Request validation required
