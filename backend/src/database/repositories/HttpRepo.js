@@ -5,9 +5,10 @@ export default class HttpRepo {
 
   pluginId = '637d8ecf82bf004233def988';
 
-  // organizationId = '61db3b27eba8adb50ca1399b';
+  organizationId = '61db3b27eba8adb50ca1399b';
 
-  // collectionName = 'task'
+  collectionName = 'task';
+ 
   readUrl = `${this.url}/data/read`;
   writeUrl = `${this.url}/data/write`;
   deleteUrl = `${this.url}/data/delete`;
@@ -21,13 +22,11 @@ export default class HttpRepo {
       organization_id: this.organizationId,
       collection_name: this.collectionName,
       bulk_write: false,
-      object_id: 'xxxx',
+      object_id: '',
       filter: {},
       payload: {},
     };
   }
-
-  //   readUrl = `${this.url}/data/read/${this.pluginId}/${this.collectionName}/${this.organizationId}`;
 
   buildQueryStr(whereObject) {
     const queryStr = '';
@@ -100,7 +99,12 @@ export default class HttpRepo {
     const whereStr = this.buildQueryStr(whereObject);
     const result = await this.get(`${this.readUrl}?${whereStr}`);
     return result;
+
   }
+    // const { organization_id, plugin_id, collection_name } = this.request;
+    const result = await this.postReq(this.readUrl, this.request);
+    return result;
+  };
 
   async findFirst() {
     const result = await axios.get(this.readUrl);
@@ -132,6 +136,7 @@ export default class HttpRepo {
   }
 
   async delete(objectId) {
+    
     this.request.object_id = objectId;
     const result = await this.deleteReq(this.deleteUrl, this.request);
     return result;
