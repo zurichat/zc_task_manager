@@ -24,12 +24,12 @@ export default class HttpRepo {
       organization_id: this.organizationId,
       collection_name: this.collectionName,
       bulk_write: false,
-      object_id: 'xxxx',
+      object_id: '',
       filter: {},
       payload: {},
     };
   }
-  readUrl = `${this.url}/data/read/${this.pluginId}/${this.collectionName}/${this.organizationId}`;
+  // readUrl = `${this.url}/data/read/${this.pluginId}/${this.collectionName}/${this.organizationId}`;
 
   buildQueryStr(whereObject) {
     const queryStr = '';
@@ -67,30 +67,23 @@ export default class HttpRepo {
     return axios.get(url, config);
   }
 
-  async getUserTask(params) {
-    this.request =  params;
-
-    return await this.getReq(this.readUrl, this.request);
-  }
-
   async deleteReq(url, data) {
     return axios.delete(url, data);
   }
 
-  async findAll() {
-    console.log(this.readUrl)
-    const result = await this.postReq(this.readUrl);
-
+  async findAll () {
+    const result = await this.postReq(this.readUrl, this.request);
     return result;
   }
 
-  async findWhere(whereObject = {}) {
-    const whereStr = this.buildQueryStr(whereObject);
-
-    const result = await this.get(`${this.readUrl}?${whereStr}`);
-
-    return result;
+  async findWhere(filter = {}) {
+    if (Object.keys(filter).length!==0){
+      this.request.filter = filter;
   }
+    // const { organization_id, plugin_id, collection_name } = this.request;
+    const result = await this.postReq(this.readUrl, this.request);
+    return result;
+  };
 
   async findFirst() {
     const result = await axios.get(this.readUrl);
@@ -122,6 +115,7 @@ export default class HttpRepo {
   }
 
   async delete(objectId) {
+    
     this.request.object_id = objectId;
 
     return await this.deleteReq(this.writeUrl, this.request);

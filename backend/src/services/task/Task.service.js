@@ -47,7 +47,7 @@ class TaskService extends HttpRepo {
   }
 
   async getUserTask(params) {
-    const getUserTask = await this.repo.getUserTask({object_id: params.id});
+    const getUserTask = await this.repo.findWhere({task_assignee: params.assignee_id});
 
     return getUserTask;
   }

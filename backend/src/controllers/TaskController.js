@@ -35,14 +35,12 @@ export default class TaskController {
 try {
   // Request validation required
   const result = await taskService.getAllTasks();
-  const data = new APIFeatures(result, query).paginate();
+  // const data = new APIFeatures(result, query).paginate();
 
-  return res.send(result?.data,
-    {currentPage: `${data[0]}`,
-    noOfPages: `${data[2]}`,
-    data: `${data[3]}`
-  }
-);
+  return res.send(result?.data)
+    
+ 
+
 } catch (error) {
   next(error);
 }
@@ -103,7 +101,7 @@ try {
     try{
       const result = await taskService.getUserTask(req.params);
 
-      res.send(result?.data);
+      res.send(result?.data.data);
     } catch (error) {
       next(error);
     }
@@ -113,7 +111,7 @@ try {
     try{
       const result = await taskService.deleteTaskCategory(req.params);
 
-      res.send(result?.data);
+      res.send(result?.data.data);
     } catch (error) {
       next(error);
     }
