@@ -7,7 +7,6 @@ export default class TaskController {
       // Request validation required
 
       const result = await taskService.create(req.body);
-
       return res.send(result.data);
     } catch (error) {
       next(error);
@@ -19,8 +18,13 @@ export default class TaskController {
 try {
   // Request validation required
   const result = await taskService.getAllTasks();
+  if (!result?.data.data) { 
+      return res.send({
+        message: "no result found"
+      });
+  } 
   const data = paginate(result?.data.data, req.query);
-
+  // const sorted_data = sort(data.result, req.query);
   return res.status(200).send({
     message: "Tasks returned successfully",
     total_pages: data.no_of_pages,
@@ -38,11 +42,20 @@ try {
   const { user_id } = req.params;
 
   // Request validation required
-  const result = await taskService.getTaskByMe({ assignee: user_id });
-
-  res.send(
-    result.data
-);
+  const result = await taskService.getTaskByMe({ task_creator: user_id });
+  if (!result?.data.data) { 
+    return res.send({
+      message: "no result found"
+    });
+}
+const data = paginate(result?.data.data, req.query);
+return res.status(200).send({
+  message: "Tasks returned successfully",
+  total_pages: data.no_of_pages,
+  current_page: data.page,
+  page_limit: data.limit,
+  data: data.result
+})
 } catch (error) {
   next(error);
 }
