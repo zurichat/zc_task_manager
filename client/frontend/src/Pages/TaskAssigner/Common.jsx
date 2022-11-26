@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { CiFilter } from "react-icons/ci"
-import Filter from "../filter/Filter"
+import Filter from "../../components/filter/Filter"
 
 import classes from "./Common.module.css"
 const Common = () => {

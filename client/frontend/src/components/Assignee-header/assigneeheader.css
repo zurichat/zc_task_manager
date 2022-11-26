@@ -1,0 +1,26 @@
+.assignee-nav a{
+display: flex;
+gap:8px;
+color:black;
+text-decoration: none;
+}
+@media screen and (max-width:375px) {
+    .assignee-nav a{
+        align-items: center;
+    }
+    .assignee-nav{
+        flex-direction: column;
+       gap:8px
+    }
+}
+ .assignee-nav a :hover , .assignee-nav a:focus{
+background-color:#00B87C ;
+border-radius: 4px 4px 0px 0px;
+color:white;
+height:28px;
+align-items: center;
+}
+ .assignee-nav a img :hover{
+    display: flex;
+    align-items: center;    
+}

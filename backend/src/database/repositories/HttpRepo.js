@@ -1,7 +1,18 @@
-/* eslint-disable linebreak-style */
 import axios from 'axios';
 
 export default class HttpRepo {
+  url = 'https://api.zuri.chat';
+
+  pluginId = '637d8ecf82bf004233def988';
+
+  organizationId = '61db3b27eba8adb50ca1399b';
+
+  collectionName = 'task';
+ 
+  readUrl = `${this.url}/data/read`;
+  writeUrl = `${this.url}/data/write`;
+  deleteUrl = `${this.url}/data/delete`;
+
   constructor(collectionName = 'task', organizationId = '61db3b27eba8adb50ca1399b') {
     this.collectionName = collectionName;
     this.organizationId = organizationId;
@@ -17,25 +28,12 @@ export default class HttpRepo {
       payload: {},
     };
   }
-  url = 'https://api.zuri.chat';
-
-  // pluginId = '637d8ecf82bf004233def988';
-
-  // organizationId = '61db3b27eba8adb50ca1399b';
-
-  // collectionName = 'task';
- 
-  readUrl = `${this.url}/data/read`;
-
-  writeUrl = `${this.url}/data/write`;
-  // readUrl = `${this.url}/data/read`
-  // ${this.pluginId}/${this.collectionName}/${this.organizationId}`;
 
   buildQueryStr(whereObject) {
     let queryStr = '';
     const whereKey = Object.keys(whereObject);
 
-    if (whereKey.length===0) {
+    if (whereKey.length === 0) {
       return '';
     }
 
@@ -63,14 +61,19 @@ export default class HttpRepo {
     if (Object.keys(config).length === 0) {
       return axios.get(url);
     }
-    return axios.get(url, config);
+    return await (
+      await axios.post(url, config)
+    ).data;
   }
 
-  async deleteReq(url, data) {
-    return axios.delete(url, data);
+  async deleteReq(url, data = {}) {
+    return await (
+      await axios.post(url, data)
+    ).data;
   }
 
-  async findAll () {
+  async findAll (organization_id) {
+    this.request.organization_id = organization_id
     const result = await this.postReq(this.readUrl, this.request);
     return result;
   } 
@@ -83,16 +86,6 @@ export default class HttpRepo {
     return result;
 }; 
  
-
-
-  // async findWhere(whereObject = {}) {
-  //   const whereStr = this.buildQueryStr(whereObject);
-
-  //   const result = await this.getReq(`${this.readUrl}?${whereStr}`); 
-
-  //   return result;
-  // }
-
   async findFirst() {
     const result = await axios.get(this.readUrl);
     return result.data['data'][0];
@@ -100,7 +93,7 @@ export default class HttpRepo {
 
   async create(payloadObject) {
     this.request.payload = payloadObject;
-
+    console.log(this.request.object_id);
     return await this.postReq(this.writeUrl, this.request);
   }
 
@@ -117,15 +110,17 @@ export default class HttpRepo {
 
   async update(objectId, payloadObject) {
     this.request.object_id = objectId;
+    //console.log(object_id)
     this.request.payload = payloadObject;
 
     return await this.putReq(this.writeUrl, this.request);
   }
 
   async delete(objectId) {
+    
     this.request.object_id = objectId;
-
-    return await this.deleteReq(this.writeUrl, this.request);
+    const result = await this.deleteReq(this.deleteUrl, this.request);
+    return result;
   }
 
   async findWorkSpaceUsers(bearerToken) {
