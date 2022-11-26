@@ -13,7 +13,17 @@ export default class TaskController {
     }
   }
 
-  static async remove(req, res, next) {
+  static async update(req, res, next) {
+    try {
+      // Request validation required
+      const result = await taskService.update(req.body);
+         return res.send(result);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+static async remove(req, res, next) {
     try {
       // Request validation required
       const result = await taskService.remove(req.body);
@@ -47,9 +57,6 @@ try {
   // const data = new APIFeatures(result, query).paginate();
 
   return res.send(result?.data)
-    
- 
-
 } catch (error) {
   next(error);
 }
@@ -92,6 +99,16 @@ try {
     }
   }
 
+  static async getTasksByCategory(req, res, next) {
+    try {
+      const {category} = req.params;
+      const result = await taskService.getTasksByCategory(category);
+         return res.send(result);
+    } catch (error) {
+      next(error);
+    }
+  }
+  
   static async getTaskHistory(req, res, next) {
     try {
       // Request validation required
@@ -108,7 +125,6 @@ try {
       const id = req.params.assigned_task_id;
 
       const result = await taskService.reassign(id, req.body);
-
       return res.send(result?.data);
     } catch (error) {
       next(error);

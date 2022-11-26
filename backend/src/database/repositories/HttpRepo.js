@@ -29,7 +29,7 @@ export default class HttpRepo {
   }
 
   buildQueryStr(whereObject) {
-    const queryStr = '';
+    let queryStr = '';
     const whereKey = Object.keys(whereObject);
 
     if (whereKey.length === 0) {
@@ -97,7 +97,8 @@ export default class HttpRepo {
 
   async findWhere(whereObject = {}) {
     const whereStr = this.buildQueryStr(whereObject);
-    const result = await this.get(`${this.readUrl}?${whereStr}`);
+    const result = await this.getReq(`${this.readUrl}?${whereStr}`);
+
     return result;
 
   }
@@ -113,7 +114,7 @@ export default class HttpRepo {
 
   async create(payloadObject) {
     this.request.payload = payloadObject;
-
+    console.log(this.request.object_id);
     return await this.postReq(this.writeUrl, this.request);
   }
 
@@ -130,6 +131,7 @@ export default class HttpRepo {
 
   async update(objectId, payloadObject) {
     this.request.object_id = objectId;
+    //console.log(object_id)
     this.request.payload = payloadObject;
 
     return await this.putReq(this.writeUrl, this.request);

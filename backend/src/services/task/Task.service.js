@@ -14,6 +14,15 @@ class TaskService extends HttpRepo {
     return create;
   }
 
+  async update(params) {
+    const {objectId} = params
+    const updatedTask = await this.repo.update(objectId, params);
+    return updatedTask;
+  }
+
+  async getTasksByCategory(category) {
+    const result = await this.repo.findWhere({task_category: category});
+    return result;
   async assign(id, params) {
     const assign = await this.repo.store(id, params);
 
