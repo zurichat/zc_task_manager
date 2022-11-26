@@ -1,0 +1,34 @@
+  [
+    {
+        "id": 1,
+         "name": "A new design task has just been created. Chack the tasks tab for more information",
+         "time": "7:00am, Today"
+
+    },
+    {
+        "id": 2,
+         "name": "Design System Task has just been updated. Check the tasks tab for more information",
+         "time": "7:00am, Today"
+    },
+    {
+        "id": 3,
+         "name": "Shola just commented “Done and dusted” on Zuri Chat feature Task",
+         "time": "7:00am, Today"
+    },
+    {
+        "id": 4,
+         "name": "Zuri Chat feature has been reassigned to Zack",
+         "time": "7:00am, Today"
+    },
+    {
+        "id": 5,
+         "name": "Design System has been reassigned to Nike",
+         "time": "7:00am, Today"
+    },
+    {
+        "id": 6,
+         "name": "Naza just commented @Temi this needs to be redone on Design System tasks",
+         "time": "7:00am, Today"
+    }
+    
+]

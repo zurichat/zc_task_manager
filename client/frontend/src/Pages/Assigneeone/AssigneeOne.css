@@ -1,0 +1,144 @@
+.assignee-body{
+    max-width:1440vw;
+    width:100%
+}
+.assignee-nav{
+    display: flex;
+}
+.assignee-nav a{
+    margin-inline: 24px;
+}
+.assignee-toggle{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 32px;
+    margin-bottom: 64px;
+}
+.assignee-fil {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-right: 0.5rem;
+  }
+.assignee-zuri{
+    margin-inline: 24px;
+}
+.assignee-feature{
+    padding-inline: 24px;
+    border:1px solid  #E5E5E5;
+}
+.assignee-first{
+    display: flex;
+    flex-direction: column;
+    gap:12px;
+    margin-top:20px
+}
+.assignee-submit{
+    display:flex;
+    gap:24px
+}
+.assignee-list{
+    display: flex;
+    flex-direction: column;
+    gap:8px;
+    margin-top: 12px;
+}
+.time{
+    float:right
+}
+.timeline{
+    width:100%;
+    max-width:320px
+}
+.link-submit{
+    display:flex;
+    gap:12px;
+    flex-direction: column;
+}
+.url{
+    width:60vw;
+    height:49px
+}
+.submit-box{
+    gap:2rem;
+    display: flex;
+}
+.assignee-profile{
+    display: flex;
+    align-items: center;
+    gap:10px
+}
+.assignee-profile-name{
+    display: flex;
+    gap:10px
+}
+.assignee-profile-list{
+    display: flex;
+    flex-direction: column;
+    gap:40px
+}
+.typing{
+    height:54px;
+    width:90vw;
+    margin-top:32px;
+}
+.p-typing{
+    padding-top:8px;
+    padding-bottom: 24px;
+    font-style: italic;
+    color:#B0AFB0
+}
+.add{
+    align-self: flex-end;
+    padding-top: 40px;
+    padding-bottom: 10px;
+}
+.assignee-comment{
+    padding-top:40px;
+    padding-bottom: 24px;
+}
+.assignee-btn{
+    background-color: #00B87C;
+    color:white;
+    width:8vw;
+    border: 0;
+    border-radius: 4px;
+    font-family: "Lato", sans-serif;
+}
+.assignee-frontend{
+    text-decoration: none;
+    color:white;
+    background-color: #D5205B;
+    border-radius: 4px;
+    width:7vw;
+    text-align: center;
+    height:28px;
+}
+.assignee-title{
+    width:20vw;
+    text-align: left;
+    font-weight: 700;
+}
+input::placeholder{
+    padding: 20px;
+    font-family: "Lato", sans-serif;
+}
+.link-submit p{
+    font-weight: 700;   
+}
+
+
+@media screen and (max-width:480px) {
+    .assignee-frontend{
+        width:30vw
+    }
+    .assignee-btn{
+        width:20vw
+    }
+    .line{
+        width:75vw
+    }
+    .assignee-btn{
+        padding:2vw
+    }
+}
