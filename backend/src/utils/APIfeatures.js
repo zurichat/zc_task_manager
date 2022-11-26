@@ -8,6 +8,7 @@ const sort = (result, queryString) => {
         } else {
             result.sort(function(x, y){
                 result =  y.field[0] - x.field[0];
+                console.log(result)
             });
         }
         return result;
