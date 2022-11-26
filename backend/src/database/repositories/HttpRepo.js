@@ -6,9 +6,9 @@ export default class HttpRepo {
 
   pluginId = '637d8ecf82bf004233def988';
 
-  // organizationId = '61db3b27eba8adb50ca1399b';
+  organizationId = '61db3b27eba8adb50ca1399b';
 
-  // collectionName = 'task';
+  collectionName = 'task';
  
   // readUrl = `${this.url}/data/read/${this.pluginId}/${this.collectionName}/${this.organizationId}`;
   readUrl = `${this.url}/data/read`;
@@ -65,6 +65,12 @@ export default class HttpRepo {
       return axios.get(url);
     }
     return axios.get(url, config);
+  }
+
+  async getUserTask(params) {
+    this.request =  params;
+
+    return await this.getReq(this.readUrl, this.request);
   }
 
   async deleteReq(url, data) {
