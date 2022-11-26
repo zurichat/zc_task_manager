@@ -29,7 +29,6 @@
     "knex": "^2.3.0",
     "morgan": "^1.10.0",
     "mysql2": "^2.3.3",
-    "node-cron": "^3.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.2",
