@@ -1,13 +1,16 @@
 import express from 'express';
 import TaskController from '../controllers/TaskController.js';
+import { createTaskValidator } from "../validators/taskValidator.js";
+import { createAssigTaskValidator, updateAssignTaskValidator } from "../validators/assignTaskValidator.js";
+import { createCategoryValidator } from "../validators/categoryValidator.js";
 
 const router = express.Router();
 
-router.post('/', TaskController.create);
+router.post('/', createTaskValidator, TaskController.create);
 router.get('/', TaskController.getAllTask);
-router.get('/:user_id', TaskController.getTaskByMe);
-router.post('/category', TaskController.createTaskCategory);
-router.post('/:task_id/assign', TaskController.assign);
-router.patch('/:assigned_task_id/reassign', TaskController.reassign);
+router.get('/:user_id/by_me', TaskController.getTaskByMe);
+router.post('/category', createCategoryValidator, TaskController.createTaskCategory);
+router.post('/:task_id/assign', createAssigTaskValidator, TaskController.assign);
+router.patch('/:assigned_task_id/reassign', updateAssignTaskValidator, TaskController.reassign);
 
 export default router;

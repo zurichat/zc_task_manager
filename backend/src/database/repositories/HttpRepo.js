@@ -2,33 +2,34 @@
 import axios from 'axios';
 
 export default class HttpRepo {
-  url = 'https://api.zuri.chat';
-
-  pluginId = '637d8ecf82bf004233def988';
-
-  organizationId = '61db3b27eba8adb50ca1399b';
-
-  collectionName = 'task';
- 
-  readUrl = `${this.url}/data/read`;
-
-  writeUrl = `${this.url}/data/write`;
-
   constructor(collectionName = 'task', organizationId = '61db3b27eba8adb50ca1399b') {
     this.collectionName = collectionName;
     this.organizationId = organizationId;
+    this.pluginId = "637d8ecf82bf004233def988";
 
     this.request = {
       plugin_id: this.pluginId,
       organization_id: this.organizationId,
       collection_name: this.collectionName,
       bulk_write: false,
-      object_id: 'xxxx',
+      object_id: "",
       filter: {},
       payload: {},
     };
   }
-  readUrl = `${this.url}/data/read/${this.pluginId}/${this.collectionName}/${this.organizationId}`;
+  url = 'https://api.zuri.chat';
+
+  // pluginId = '637d8ecf82bf004233def988';
+
+  // organizationId = '61db3b27eba8adb50ca1399b';
+
+  // collectionName = 'task';
+ 
+  readUrl = `${this.url}/data/read`;
+
+  writeUrl = `${this.url}/data/write`;
+  // readUrl = `${this.url}/data/read`
+  // ${this.pluginId}/${this.collectionName}/${this.organizationId}`;
 
   buildQueryStr(whereObject) {
     let queryStr = '';
@@ -44,7 +45,6 @@ export default class HttpRepo {
     whereKey.forEach((key, index) => {
       queryStr = `${key}=${whereValue[index]}&`;
     });
-
     return queryStr.slice(0, -1);
   }
 
@@ -70,20 +70,28 @@ export default class HttpRepo {
     return axios.delete(url, data);
   }
 
-  async findAll() {
-    const result = await this.getReq(this.readUrl);
-
+  async findAll () {
+    const result = await this.postReq(this.readUrl, this.request);
     return result;
+  } 
+
+  async findWhere(filter = {}) {
+    if (Object.keys(filter).length!==0){
+      this.request.filter = filter;
   }
-
-  async findWhere(whereObject = {}) {
-    const whereStr = this.buildQueryStr(whereObject);
-
-    const result = await this.getReq(`${this.readUrl}?${whereStr}`);
-    console.log(`${this.readUrl}?${whereStr}`)    
-
+    const result = await this.postReq(this.readUrl, this.request);
     return result;
-  }
+}; 
+ 
+
+
+  // async findWhere(whereObject = {}) {
+  //   const whereStr = this.buildQueryStr(whereObject);
+
+  //   const result = await this.getReq(`${this.readUrl}?${whereStr}`); 
+
+  //   return result;
+  // }
 
   async findFirst() {
     const result = await axios.get(this.readUrl);
