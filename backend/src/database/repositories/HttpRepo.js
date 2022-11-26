@@ -16,13 +16,14 @@ export default class HttpRepo {
   constructor(collectionName = 'task', organizationId = '61db3b27eba8adb50ca1399b') {
     this.collectionName = collectionName;
     this.organizationId = organizationId;
+    this.pluginId = "637d8ecf82bf004233def988";
 
     this.request = {
       plugin_id: this.pluginId,
       organization_id: this.organizationId,
       collection_name: this.collectionName,
       bulk_write: false,
-      object_id: '',
+      object_id: "",
       filter: {},
       payload: {},
     };
@@ -42,7 +43,6 @@ export default class HttpRepo {
     whereKey.forEach((key, index) => {
       queryStr = `${key}=${whereValue[index]}&`;
     });
-
     return queryStr.slice(0, -1);
   }
 
@@ -72,41 +72,20 @@ export default class HttpRepo {
     ).data;
   }
 
-  async findAll() {
-    const { organization_id, plugin_id, collection_name } = this.request;
-    const result = await this.getReq(this.readUrl, {
-      organization_id,
-      plugin_id,
-      collection_name,
-    });
-
-    return result;
-  }
-
-  async findSubmitted() {
-    const collectionName = 'submissions';
-    this.request = { ...this.request, collection_name: collectionName };
-    const { collection_name, plugin_id, organization_id } = this.request;
-    const submission = await this.getReq(this.readUrl, {
-      collection_name,
-      organization_id,
-      plugin_id,
-    });
-    return submission;
-  }
-
-  async findWhere(whereObject = {}) {
-    const whereStr = this.buildQueryStr(whereObject);
-    const result = await this.getReq(`${this.readUrl}?${whereStr}`);
-
-    return result;
-
-  }
-    // const { organization_id, plugin_id, collection_name } = this.request;
+  async findAll (organization_id) {
+    this.request.organization_id = organization_id
     const result = await this.postReq(this.readUrl, this.request);
     return result;
-  };
+  } 
 
+  async findWhere(filter = {}) {
+    if (Object.keys(filter).length!==0){
+      this.request.filter = filter;
+  }
+    const result = await this.postReq(this.readUrl, this.request);
+    return result;
+}; 
+ 
   async findFirst() {
     const result = await axios.get(this.readUrl);
     return result.data['data'][0];

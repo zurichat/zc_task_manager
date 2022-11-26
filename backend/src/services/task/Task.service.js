@@ -23,7 +23,12 @@ class TaskService extends HttpRepo {
   async getTasksByCategory(category) {
     const result = await this.repo.findWhere({task_category: category});
     return result;
+  }
+  
   async assign(id, params) {
+    const collectionName = 'assigned_tasks';
+    this.request = { ...this.request, collection_name: collectionName };
+
     const assign = await this.repo.store(id, params);
 
     return assign;
@@ -35,8 +40,8 @@ class TaskService extends HttpRepo {
     return reassign;
   }
 
-  async getAllTasks() {
-    const get = await this.repo.findAll();
+  async getAllTasks(organizationId) {
+    const get = await this.repo.findAll(organizationId);
     if (!get) throw new NotFoundError('An error occured while fetching tasks');
 
     return get;

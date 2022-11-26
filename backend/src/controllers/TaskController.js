@@ -1,4 +1,5 @@
 import taskService from '../services/task/Task.service.js';
+import { sort, paginate } from '../utils/APIfeatures.js';
 
 export default class TaskController {
   static async create(req, res, next) {
@@ -6,8 +7,7 @@ export default class TaskController {
       // Request validation required
 
       const result = await taskService.create(req.body);
-
-      return res.send(result?.data);
+      return res.send(result.data);
     } catch (error) {
       next(error);
     }
@@ -23,7 +23,7 @@ export default class TaskController {
     }
   }
 
-static async remove(req, res, next) {
+    static async remove(req, res, next) {
     try {
       // Request validation required
       const result = await taskService.remove(req.body);
@@ -32,6 +32,7 @@ static async remove(req, res, next) {
       next(error);
     }
   }
+
   static async submitTask(req, res, next) {
     try {
       const data = {
@@ -41,7 +42,6 @@ static async remove(req, res, next) {
         date_updated: '',
       };
       
-      console.log(data);
       const result = await taskService.submitTask(data);
 
       return res.send(result?.data);
@@ -49,44 +49,67 @@ static async remove(req, res, next) {
       next(error);
     }
   }
-  static async getAllTask(req, res, next) {
- 
-try {
-  // Request validation required
-  const result = await taskService.getAllTasks();
-  // const data = new APIFeatures(result, query).paginate();
 
-  return res.send(result?.data)
-} catch (error) {
-  next(error);
-}
-}
+  static async getAllTask(req, res, next) {
+    const { organization_id } = req.params;
+
+    try {
+            // Request validation required
+      const result = await taskService.getAllTasks(organization_id);
+      if (!result?.data.data) { 
+          return res.send({
+              message: "no result found"
+          });
+      } 
+            const data = paginate(result?.data.data, req.query);
+            return res.status(200).send({
+                message: "Tasks returned successfully",
+                total_page: data.no_of_pages,
+                current_page: data.page,
+                page_limit: data.limit,
+                data: data.result
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
 
   static async getTaskByMe(req, res, next) {
-    try {
-      const { user_id } = req.params;
-      // Request validation required
-      const result = await taskService.getTaskByMe({ task_creator: user_id });
+        try {
+            const { user_id } = req.params;
 
-      res.send({
-        ...result,
-      });
-    } catch (error) {
-      next(error);
+            // Request validation required
+            const result = await taskService.getTaskByMe({ task_creator: user_id });
+            if (!result?.data.data) { 
+                return res.send({
+                    message: "no result found"
+                });
+            }
+            const data = paginate(result?.data.data, req.query);
+            return res.status(200).send({
+                message: "Tasks returned successfully",
+                total_page: data.no_of_pages,
+                current_page: data.page,
+                page_limit: data.limit,
+                data: data.result
+            });
+        } catch (error) {
+              next(error);
+        }
     }
-  }
 
   static async createTaskCategory(req, res, next) {
-    try {
-      // Request validation required
-      const result = await taskService.createTaskCategory(req.body);
+        try {
+        // Request validation required
+            const result = await taskService.createTaskCategory(req.body);
 
-  return res.send(result?.data);
-} catch (error) {
-  next(error);
-}
-}
-  static async assign(req, res, next) {
+            return res.send(result?.data);
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    static async assign(req, res, next) {
     try {
       // Request validation required
       const id = req.params.task_id;
