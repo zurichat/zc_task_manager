@@ -70,6 +70,8 @@ export default class HttpRepo {
   }
 
   async findAll() {
+    console.log(this.readUrl);
+
     const result = await this.getReq(this.readUrl);
 
     return result;
