@@ -9,12 +9,10 @@ export const createAssigTaskValidator = [
         .custom((value) => value.length > 1),
 
     body("task_assignee", taskAssigneeValMsg)
-        .notEmpty()
         .isString()
         .custom((value) => value.length > 1),
 
     body("for_channel", taskForChannelValMsg)
-        .notEmpty()
         .isString()
         .custom((value) => value.length > 1),
 

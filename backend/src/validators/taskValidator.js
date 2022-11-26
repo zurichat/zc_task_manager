@@ -52,7 +52,7 @@ export const updateTaskValidator = [
 
     body("task_descriptions", taskDescriptionValMsg)
         .notEmpty()
-        .toString()
+        .isString()
         .custom((value) => value.length > 1),
 
     body("task_deadline", taskDeadlineValMsg)
