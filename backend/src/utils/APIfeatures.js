@@ -3,7 +3,6 @@ const sort = (results, queryString) => {
         const fields = queryString.order_by.split(" ");
         if (fields[1] === "asc") {
             results.sort(function(x, y){
-                console.log(x[fields[0]])
                 results =  x.fields[0] - y.fields[0];
             });
         } else {

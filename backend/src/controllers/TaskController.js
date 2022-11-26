@@ -24,7 +24,6 @@ export default class TaskController {
                 });
             } 
             const data = paginate(result?.data.data, req.query);
-            // const sorted_data = sort(data.result, req.query);
             return res.status(200).send({
                 message: "Tasks returned successfully",
                 total_page: data.no_of_pages,
@@ -49,14 +48,12 @@ export default class TaskController {
                 });
             }
             const data = paginate(result?.data.data, req.query);
-            const sorted_data = sort(data.result, req.query);
-            console.log(sorted_data);
             return res.status(200).send({
                 message: "Tasks returned successfully",
                 total_page: data.no_of_pages,
                 current_page: data.page,
                 page_limit: data.limit,
-                data: sorted_data
+                data: data.result
             });
         } catch (error) {
   next(error);
