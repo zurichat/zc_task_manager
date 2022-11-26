@@ -25,4 +25,14 @@ export default class TaskController {
       next(error);
     }
   }
+
+  static async getTasksByCategory(req, res, next) {
+    try {
+      const {category} = req.params;
+      const result = await taskService.getTasksByCategory(category);
+      return res.send(result?.data);
+    } catch (error) {
+      next(error);
+    }
+  }
 }

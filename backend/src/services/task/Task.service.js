@@ -17,6 +17,11 @@ class TaskService extends HttpRepo {
     const updatedTask = await this.repo.update(objectId, params);
     return updatedTask;
   }
+
+  async getTasksByCategory(category) {
+    const result = await this.repo.findWhere({task_category: category});
+    return result;
+  }
 }
 
 export default new TaskService();

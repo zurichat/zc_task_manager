@@ -6,9 +6,9 @@ export default class HttpRepo {
 
   pluginId = '637d8ecf82bf004233def988';
 
-  organizationId = '';
+  organizationId = '61db3b27eba8adb50ca1399b';
 
-  collectionName = '';
+  collectionName = 'task';
 
   readUrl = `${this.url}/data/read/${this.pluginId}/${this.collectionName}/${this.organizationId}`;
 
@@ -30,10 +30,9 @@ export default class HttpRepo {
   }
 
   buildQueryStr(whereObject) {
-    const queryStr = '';
+    let queryStr = '';
     const whereKey = Object.keys(whereObject);
-
-    if (whereKey.length) {
+    if (!whereKey.length) {
       return '';
     }
 
@@ -44,7 +43,7 @@ export default class HttpRepo {
       queryStr = `${key}=${whereValue[index]}&`;
     });
 
-    return queryStr.trimEnd('&');
+    return queryStr.substring(0, queryStr.length - 1);;
   }
 
   async postReq(url, data, config = {}) {
@@ -71,15 +70,12 @@ export default class HttpRepo {
 
   async findAll() {
     const result = await this.getReq(this.readUrl);
-
     return result;
   }
 
   async findWhere(whereObject = {}) {
     const whereStr = this.buildQueryStr(whereObject);
-
     const result = await this.getReq(`${this.readUrl}?${whereStr}`);
-
     return result;
   }
 
