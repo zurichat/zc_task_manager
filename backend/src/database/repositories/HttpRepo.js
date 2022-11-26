@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 import axios from 'axios';
 
 export default class HttpRepo {
@@ -10,10 +9,9 @@ export default class HttpRepo {
 
   collectionName = 'task';
  
-  // readUrl = `${this.url}/data/read/${this.pluginId}/${this.collectionName}/${this.organizationId}`;
   readUrl = `${this.url}/data/read`;
-
   writeUrl = `${this.url}/data/write`;
+  deleteUrl = `${this.url}/data/delete`;
 
   constructor(collectionName = 'task', organizationId = '61db3b27eba8adb50ca1399b') {
     this.collectionName = collectionName;
@@ -29,13 +27,12 @@ export default class HttpRepo {
       payload: {},
     };
   }
-  // readUrl = `${this.url}/data/read/${this.pluginId}/${this.collectionName}/${this.organizationId}`;
 
   buildQueryStr(whereObject) {
     const queryStr = '';
     const whereKey = Object.keys(whereObject);
 
-    if (whereKey.length===0) {
+    if (whereKey.length === 0) {
       return '';
     }
 
@@ -64,21 +61,45 @@ export default class HttpRepo {
     if (Object.keys(config).length === 0) {
       return axios.get(url);
     }
-    return axios.get(url, config);
+    return await (
+      await axios.post(url, config)
+    ).data;
   }
 
-  async deleteReq(url, data) {
-    return axios.delete(url, data);
+  async deleteReq(url, data = {}) {
+    return await (
+      await axios.post(url, data)
+    ).data;
   }
 
-  async findAll () {
-    const result = await this.postReq(this.readUrl, this.request);
+  async findAll() {
+    const { organization_id, plugin_id, collection_name } = this.request;
+    const result = await this.getReq(this.readUrl, {
+      organization_id,
+      plugin_id,
+      collection_name,
+    });
+
     return result;
   }
 
-  async findWhere(filter = {}) {
-    if (Object.keys(filter).length!==0){
-      this.request.filter = filter;
+  async findSubmitted() {
+    const collectionName = 'submissions';
+    this.request = { ...this.request, collection_name: collectionName };
+    const { collection_name, plugin_id, organization_id } = this.request;
+    const submission = await this.getReq(this.readUrl, {
+      collection_name,
+      organization_id,
+      plugin_id,
+    });
+    return submission;
+  }
+
+  async findWhere(whereObject = {}) {
+    const whereStr = this.buildQueryStr(whereObject);
+    const result = await this.get(`${this.readUrl}?${whereStr}`);
+    return result;
+
   }
     // const { organization_id, plugin_id, collection_name } = this.request;
     const result = await this.postReq(this.readUrl, this.request);
@@ -117,8 +138,8 @@ export default class HttpRepo {
   async delete(objectId) {
     
     this.request.object_id = objectId;
-
-    return await this.deleteReq(this.writeUrl, this.request);
+    const result = await this.deleteReq(this.deleteUrl, this.request);
+    return result;
   }
 
   async findWorkSpaceUsers(bearerToken) {

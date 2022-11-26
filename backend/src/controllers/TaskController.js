@@ -13,6 +13,15 @@ export default class TaskController {
     }
   }
 
+  static async remove(req, res, next) {
+    try {
+      // Request validation required
+      const result = await taskService.remove(req.body);
+      return res.send(result);
+    } catch (error) {
+      next(error);
+    }
+  }
   static async submitTask(req, res, next) {
     try {
       const data = {
@@ -24,6 +33,7 @@ export default class TaskController {
       
       console.log(data);
       const result = await taskService.submitTask(data);
+
       return res.send(result?.data);
     } catch (error) {
       next(error);
@@ -31,7 +41,6 @@ export default class TaskController {
   }
   static async getAllTask(req, res, next) {
  
-
 try {
   // Request validation required
   const result = await taskService.getAllTasks();
@@ -46,31 +55,30 @@ try {
 }
 }
 
-static async getTaskByMe(req, res, next) {
-try {
-  const user_id = req.params
-  // Request validation required
-  const result = await taskService.getTaskByMe({"task_creator": "user_id"});
+  static async getTaskByMe(req, res, next) {
+    try {
+      const { user_id } = req.params;
+      // Request validation required
+      const result = await taskService.getTaskByMe({ task_creator: user_id });
 
-  res.send({
-    ...result,
-  });
-} catch (error) {
-  next(error);
-}
-}
+      res.send({
+        ...result,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
 
-static async createTaskCategory(req, res, next) {
-try {
-  // Request validation required
-  const result = await taskService.createTaskCategory(req.body);
+  static async createTaskCategory(req, res, next) {
+    try {
+      // Request validation required
+      const result = await taskService.createTaskCategory(req.body);
 
   return res.send(result?.data);
 } catch (error) {
   next(error);
 }
 }
-
   static async assign(req, res, next) {
     try {
       // Request validation required
@@ -79,6 +87,16 @@ try {
       const result = await taskService.assign(id, req.body);
 
       return res.send(result?.data);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async getTaskHistory(req, res, next) {
+    try {
+      // Request validation required
+      const result = await taskService.history();
+      return res.send(result);
     } catch (error) {
       next(error);
     }

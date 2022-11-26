@@ -4,6 +4,8 @@ import TaskController from '../controllers/TaskController.js';
 const router = express.Router();
 
 router.post('/', TaskController.create);
+router.post('/delete', TaskController.remove);
+router.get('/submitted', TaskController.getTaskHistory);
 router.post('/:assignee_id/taskToMe', TaskController.getUserTask);
 router.post('/:taskId/submit', TaskController.submitTask);
 router.get('/', TaskController.getAllTask);
