@@ -14,10 +14,10 @@ const App = () => {
       <Routes>
         <Route path="/" element={<TaskAsignedPage />} />
         <Route path="/notification" element={<AssignerNotification />} />
-        <Route path="/asigneenotify" element={<AssigneeNotification />} />
         <Route path="/addtask" element={<AddTask />} />
         <Route path="/taskhistory" element={<TaskHistory />} />
         <Route path ="/feature" element ={<AssigneeOne />}/>
+        <Route path="/asigneenotify" element={<AssigneeNotification />} />
         <Route path="/assignee-task-history" element={<AssigneeTaskHistory />} />
       </Routes>
     </>
