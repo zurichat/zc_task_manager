@@ -5,11 +5,15 @@ import Header from "../../components/Header/Header"
 import { RiArrowDownSLine } from "react-icons/ri"
 import { CiFilter } from 'react-icons/ci'
 import Filter from "../../components/filter/Filter"
+import { useGetTasksQuery } from "../../api/TaskApi"
 
 const TaskHistory = () => {
   const [historyData, setHistoryData] = useState([])
   const [Loading, setLoading] = useState(true)
+  const { data } = useGetTasksQuery()
 
+
+  console.log(data)
   useEffect((() => {
     fetch('https:/dummydata/history') /* fake api waiting for backend endpoint*/
       .then((response) => response.json())
@@ -30,7 +34,7 @@ const TaskHistory = () => {
   return (
     <div style={{ width: "100%", padding: "2rem 3rem 1.5rem" }}>
       <Header
-      link='Task'
+        link='Task'
       />
       <div className="task__history">
         <div className="task-history-header">
