@@ -31,14 +31,14 @@ const options = {
 };
 
 const specs = swaggerJsDoc(options);
-//setting up swagger doc
-app.use('/api/v1/docs', swaggerUI.serve, swaggerUI.setup(specs));
+
 
 app.use(helmet());
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(morgan(config.env.isProduction ? 'common' : 'dev'));
+app.use('/api/v1/docs', swaggerUI.serve, swaggerUI.setup(specs));
 app.use(routes);
 app.use(notFoundHandler);
 app.use(errorHandler);
