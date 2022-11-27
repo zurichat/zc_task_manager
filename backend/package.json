@@ -24,7 +24,7 @@
     "helmet": "^6.0.0",
     "knex": "^2.3.0",
     "morgan": "^1.10.0",
-    "mysql2": "^2.3.3",
+    "mysql2": "^2.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.2",
