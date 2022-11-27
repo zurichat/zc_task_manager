@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import Header from "../../components/Header/Header"
 import style from "./AddTask.module.css"
-import {ToastContainer,toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AddTask = () => {
@@ -20,72 +20,72 @@ const AddTask = () => {
       ...value,
       [name]: val
     })
-}
+  }
 
-    let onSubmit = (e) => {
-        e.preventDefault();
-        console.log('love')
-        const {taskTitle, taskDescription, submissionDate, submissionTime} = value
-        if(!taskTitle || !taskDescription || !submissionDate || !submissionTime){
-            console.log('killer')
-            toast.error('please, fill all fields', {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                });
-        }
-        else{
-            // team sandpaper backend refused to turn up
-            fetch('https://nobackend/task', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(value),
-            })
-            .then((response) => response.json())
-            .then((data) => {
-                toast.success('please, fill all fields', {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                    });
-            })
-            .catch((error) => {
-                toast.error(error, {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                    });
-            });
-        }
-
-
+  let onSubmit = (e) => {
+    e.preventDefault();
+    console.log('love')
+    const { taskTitle, taskDescription, submissionDate, submissionTime } = value
+    if (!taskTitle || !taskDescription || !submissionDate || !submissionTime) {
+      console.log('killer')
+      toast.error('please, fill all fields', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
-  
+    else {
+      // team sandpaper backend refused to turn up
+      fetch('https://hng-s8o8.onrender.com/task', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ...value, organization_id: '61db3b27eba8adb50ca1399b' }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          toast.success('Task created successfully', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        })
+        .catch((error) => {
+          toast.error(error, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        });
+    }
+
+
+  }
+
   return (
     <div style={{ width: "100%", padding: "2rem 3rem 1.5rem" }}>
-        <ToastContainer />
-      <Header 
-      link=''
+      <ToastContainer />
+      <Header
+        link=''
       />
       <div className={style.addTaskContainer}>
-        <form>
+        <form onSubmit={onSubmit}>
           <div>
             <label className={style.label}>Task Title</label>
             <br />
@@ -151,9 +151,9 @@ const AddTask = () => {
             </div>
           </div>
 
-          <button 
-          className={style.submitBtn}
-          onClick={onSubmit}
+          <button
+            className={style.submitBtn}
+            onClick={onSubmit}
           >Send</button>
         </form>
       </div>
