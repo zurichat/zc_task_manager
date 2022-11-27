@@ -23,7 +23,7 @@ const options = {
     servers: [
       {
         //update to production url
-        url: 'https://zuri-chat-task-manager.onrender.com',
+        url: 'https://hng-s8o8.onrender.com/',
       },
     ],
   },
