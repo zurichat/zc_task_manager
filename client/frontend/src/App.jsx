@@ -4,6 +4,7 @@ import TaskAsignedPage from "./Pages/TaskAssigner/TaskAsigned"
 import AddTask from "./Pages/AddTask/AddTask"
 import TaskHistory from "./Pages/TaskHistory/TaskHistory"
 import AssigneeTaskHistory from "./Pages/AssigneeTaskHistory/assignee-task-history"
+import AssigneeNotification from "./components/AssigneeNotification/NotifyAssignee"
 
 import "./App.css"
 import AssigneeOne from "./Pages/Assigneeone/AssigneeOne"
@@ -13,6 +14,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<TaskAsignedPage />} />
         <Route path="/notification" element={<AssignerNotification />} />
+        <Route path="/asigneenotify" element={<AssigneeNotification />} />
         <Route path="/addtask" element={<AddTask />} />
         <Route path="/taskhistory" element={<TaskHistory />} />
         <Route path ="/feature" element ={<AssigneeOne />}/>

@@ -1,12 +1,10 @@
 import React from 'react'
-import Header from '../../components/AssigneeNotification/Header'
-import Body from '../../components/AssigneeNotification/Body'
+import AssigneeNotification from '../../components/AssigneeNotification/NotifyAssignee'
 
 export default function Notification() {
   return (
     <div>
-        <Header />
-        <Body />
+        <AssigneeNotification />
     </div>
   )
 }
