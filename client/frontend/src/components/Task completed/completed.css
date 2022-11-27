@@ -1,0 +1,73 @@
+.completed-modal{
+    /* position: absolute;
+    width: 29.5rem; */
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    inset: 0;
+    font-weight: 400;
+    z-index: 100;
+
+}
+.completed-overlay{
+    position: absolute;
+    inset: 0;
+    background-color: rgba(64, 79, 74, 0.5);
+    z-index: 150;
+}
+.completed-card{
+    width: 30vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    padding: 56px 24px 32px;
+    z-index: 200;
+    border-radius: 4px;
+    font-family: "Lato" , sans-serif;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.completed-buttons{
+    align-self: flex-end;
+}
+.completed-edit{
+    margin-inline: 24px;
+    border: none;
+    color: #00B87C;
+    background-color: unset;
+    font-weight: 400;
+    font-family: "Lato" , sans-serif;
+} 
+.completed-submit{
+    color:white;
+    background-color: #00B87C;
+    border:none;
+    padding:1vw;
+    border-radius: 4px;
+    font-family: "Lato" , sans-serif;
+}
+.completed-text{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size:0.8rem;
+    
+}
+@media screen and (max-width:890px) {
+    .completed-card{
+      width:50vw
+    }
+    .completed-submit{
+        padding:2vw
+    }
+}
+@media screen and (max-width:500px) {
+    .completed-card{
+      width:80vw
+    }
+}
