@@ -14,15 +14,18 @@
 
 .notificationDetail:nth-child(3n) {
     background-color: #FFEEEE;
+    border-left: 20px solid #F40101;
 }
 
 .notificationDetail:nth-child(3n+1) {
     background-color: #FFF9EE;
-
+    border-left: 20px solid #FFB425;
+    
 }
 
 .notificationDetail:nth-child(3n+2) {
     background-color: #DBFFF3;
+    border-left: 20px solid #008B5E;
 }
 
 .designFeatures {

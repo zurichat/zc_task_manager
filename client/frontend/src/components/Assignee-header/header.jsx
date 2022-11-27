@@ -10,7 +10,7 @@ function AssigneeHeader ()  {
        <p>Tasks</p>
        <img src={check} alt="" />
       </Link> 
-      <Link>
+      <Link to='/asigneenotify'>
        <p>Notification</p>
        <img src={bell} alt="" />
       </Link>
