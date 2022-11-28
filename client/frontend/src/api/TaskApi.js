@@ -9,7 +9,7 @@ export const TasksApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl }),
     endpoints: (builder) => ({
         getTasks: builder.query({
-            query: (page, organization_id) => createRequest(`/task/61db3b27eba8adb50ca1399b/?page=${page}`)
+            query: (page, organization_id) => createRequest(`/task/${organization_id}/?page=${page}`)
         }),
         addTask: builder.mutation({
             query: (task) => ({
