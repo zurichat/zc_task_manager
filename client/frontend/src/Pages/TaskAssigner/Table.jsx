@@ -4,7 +4,7 @@ import { useGetTasksQuery } from "../../api/TaskApi"
 const Table = () => {
 
   const organization_id = '61db3b27eba8adb50ca1399b'
-  const { data: tasks, isLoading } = useGetTasksQuery(9, organization_id)
+  const { data: tasks, isLoading, isError } = useGetTasksQuery(9, organization_id)
   return (
     <table className={classes.table}>
       <thead>
@@ -18,6 +18,7 @@ const Table = () => {
       </thead>
       <tbody>
         {isLoading && <h1 style={{ margin: 'auto' }}>Loading..</h1>}
+        {isError && <h1>Something went wrong</h1>}
         {tasks?.data.map((item, index) => (
           <TableRow
             key={index}

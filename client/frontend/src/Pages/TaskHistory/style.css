@@ -34,9 +34,9 @@
   z-index: 3;
 }
 
-.table-wrapper {
+/* .table-wrapper {
   overflow-x: scroll;
-}
+} */
 
 .task__history .table {
   width: 100%;
