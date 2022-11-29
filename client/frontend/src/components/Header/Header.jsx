@@ -7,6 +7,27 @@ import style from "./Header.module.css"
 const Header = ({ link }) => {
   const [show, setShow] = useState(false)
   const navigate = useNavigate()
+
+  const allMonth = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ]
+  const now = new Date()
+  const day = now.getDate()
+  const month = now.getMonth()
+  const year = now.getFullYear()
+  const formattedDate = `${day}th ${allMonth[+month]}, ${year}`
+
   return (
     <header className={style.assignment__header}>
       <div className={style.profile}>
@@ -16,23 +37,23 @@ const Header = ({ link }) => {
       <div className={style.assignment_details_grp}>
         <div className={style.assignment_details}>
           <span>
-            <p className={style.assigned_number}>09</p>
+            <p className={style.assigned_number}>00</p>
             <p className={style.assigned_title}>Task Assigned</p>
           </span>
           <span>
-            <p className={style.assigned_number}>05</p>
+            <p className={style.assigned_number}>00</p>
             <p className={style.assigned_title}>Admin tasks</p>
           </span>
           <span>
-            <p className={style.assigned_number}>24</p>
+            <p className={style.assigned_number}>00</p>
             <p className={style.assigned_title}>Assignees</p>
           </span>
           <span>
-            <p className={style.assigned_number}>13</p>
+            <p className={style.assigned_number}>00</p>
             <p className={style.assigned_title}>Notification</p>
           </span>
         </div>
-        <p>6th december, 2022</p>
+        <p>{formattedDate}</p>
       </div>
       <div className={style.action_grp}>
         <div className={style.task_notif}>

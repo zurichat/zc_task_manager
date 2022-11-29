@@ -1,21 +1,25 @@
-import HttpRepo from './HttpRepo';
+import HttpRepo from './HttpRepo.js';
 
-export default class PluginInstallationRepo extends HttpRepo {
+class PluginInstallationRepo extends HttpRepo {
   installUrl = `${this.url}organizations/${this.organizationId}/plugins`;
 
-  async installPluginOnWorkspace(data, bearerToken) {
-    return await this.postReq(this.installUrl, data, {
+  // `${this.installUrl}/${this.pluginId}`
+
+  async installPluginOnWorkspace(orgUrl, data, bearerToken) {
+    return await this.postReq(orgUrl, data, {
       headers: {
         Authorization: `Bearer ${bearerToken}`,
       },
     });
   }
 
-  async uninstallPluginFromWorkspace(data, bearerToken) {
-    return await this.deleteReq(`${this.installUrl}/${this.pluginId}`, data, {
+  async uninstallPluginFromWorkspace(orgUrl, data, bearerToken) {
+    return await this.deleteReq(orgUrl, data, {
       headers: {
         Authorization: `Bearer ${bearerToken}`,
       },
     });
   }
 }
+
+export default new PluginInstallationRepo();
