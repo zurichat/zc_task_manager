@@ -1,10 +1,14 @@
 import TableRow from "./TableRow"
 import classes from "./Table.module.css"
 import { useGetTasksQuery } from "../../api/TaskApi"
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
 const Table = () => {
-
-  const organization_id = '61db3b27eba8adb50ca1399b'
-  const { data: tasks, isLoading, isError } = useGetTasksQuery(9, organization_id)
+  const organization_id = "61db3b27eba8adb50ca1399b"
+  const {
+    data: tasks,
+    isLoading,
+    isError
+  } = useGetTasksQuery(9, organization_id)
   return (
     <table className={classes.table}>
       <thead>
@@ -17,16 +21,28 @@ const Table = () => {
         </tr>
       </thead>
       <tbody>
-        {isLoading && <h1 style={{ margin: 'auto' }}>Loading..</h1>}
-        {isError && <h1>Something went wrong</h1>}
+        {isLoading && <LoadingSpinner />}
+        {isError && <h1 className={classes.h1}>Could not fetch tasks</h1>}
         {tasks?.data.map((item, index) => (
           <TableRow
             key={index}
             row1={item.taskTitle}
-            row2={item.created_at ? new Date(item.created_at).toLocaleString() : '2/ 2/22'}
-            row3={item.created_at ? new Date(item.created_at).toLocaleString() : '2020 - 01 - 01'}
-            row4={item.created_at ? new Date(item.created_at).toLocaleTimeString() : '10:00'}
-            row5={['Update', 'Delete']}
+            row2={
+              item.created_at
+                ? new Date(item.created_at).toLocaleString()
+                : "2/ 2/22"
+            }
+            row3={
+              item.created_at
+                ? new Date(item.created_at).toLocaleString()
+                : "2020 - 01 - 01"
+            }
+            row4={
+              item.created_at
+                ? new Date(item.created_at).toLocaleTimeString()
+                : "10:00"
+            }
+            row5={["Update", "Delete"]}
           />
         ))}
       </tbody>

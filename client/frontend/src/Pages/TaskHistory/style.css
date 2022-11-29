@@ -21,7 +21,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  color: #00B87C;
+  color: #00b87c;
 }
 
 .filter-icon-grp p {
@@ -54,7 +54,7 @@
   text-align: left;
   font-weight: 400;
   font-size: 18px;
-  color: #1D1C1D;
+  color: #1d1c1d;
 }
 
 .table th:nth-child(3) {
@@ -99,7 +99,6 @@
   text-align: center;
 }
 
-
 .tasks-rows tr td:nth-child(1) {
   position: relative;
 }
@@ -108,4 +107,12 @@
   margin-left: 10px;
   position: absolute;
   top: 35%;
+}
+
+.history__not--found {
+  height: calc(100vh - 21rem);
+  /* width: 100vw; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

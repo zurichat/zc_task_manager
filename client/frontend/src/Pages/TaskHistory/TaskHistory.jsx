@@ -3,14 +3,18 @@ import React, { useState, useEffect } from "react"
 import "./style.css"
 import Header from "../../components/Header/Header"
 import { RiArrowDownSLine } from "react-icons/ri"
-import { CiFilter } from 'react-icons/ci'
+import { CiFilter } from "react-icons/ci"
 import Filter from "../../components/filter/Filter"
 import { useGetTasksQuery } from "../../api/TaskApi"
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
 
 const TaskHistory = () => {
-  const organization_id = '61db3b27eba8adb50ca1399b'
-  const { data: tasks, isLoading, isError } = useGetTasksQuery(9, organization_id)
-
+  const organization_id = "61db3b27eba8adb50ca1399b"
+  const {
+    data: tasks,
+    isLoading,
+    isError
+  } = useGetTasksQuery(9, organization_id)
 
   const [show, setShow] = useState(false)
 
@@ -21,9 +25,7 @@ const TaskHistory = () => {
   ]
   return (
     <div style={{ width: "100%", padding: "2rem 3rem 1.5rem" }}>
-      <Header
-        link='Task'
-      />
+      <Header link="Task" />
       <div className="task__history">
         <div className="task-history-header">
           <h1>Task history</h1>
@@ -31,12 +33,13 @@ const TaskHistory = () => {
             <p>Yesterday</p>
             <span
               onClick={() => setShow(prev => !prev)}
-              className="filter-icon-grp">
+              className="filter-icon-grp"
+            >
               <p>Filter</p>
               <CiFilter />
             </span>
             {show && (
-              <div className='filter-modal'>
+              <div className="filter-modal">
                 <Filter closeModal={() => setShow(false)} />
               </div>
             )}
@@ -52,16 +55,27 @@ const TaskHistory = () => {
               </tr>
             </thead>
             <tbody className="tasks-rows">
-              {isLoading && <h1 style={{ margin: 'auto' }}>Loading..</h1>}
-              {isError && <h1>Something went wrong</h1>}
+              {isLoading && <LoadingSpinner />}
+              {isError && (
+                <h1 className="history__not--found">
+                  Could not load tasks history
+                </h1>
+              )}
               {tasks?.data?.map((item, index) => (
                 <tr key={index}>
                   <td key={index}>
                     {item.taskTitle}
                     <RiArrowDownSLine className="arrow-svg" />
                   </td>
-                  <td className="task-type-a" key={index}> By me</td>
-                  <td key={index}>{item.created_at ? new Date(item.created_at).toLocaleString() : '2 / 2 / 22'}</td>
+                  <td className="task-type-a" key={index}>
+                    {" "}
+                    By me
+                  </td>
+                  <td key={index}>
+                    {item.created_at
+                      ? new Date(item.created_at).toLocaleString()
+                      : "2 / 2 / 22"}
+                  </td>
                   <button className="goto-btn">Go to task</button>
                 </tr>
               ))}
