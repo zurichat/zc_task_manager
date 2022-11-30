@@ -36,3 +36,10 @@
 .th5 {
   flex-basis: 8%;
 }
+
+.h1 {
+  height: calc(100vh - 21rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

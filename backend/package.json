@@ -24,7 +24,10 @@
     "helmet": "^6.0.0",
     "knex": "^2.3.0",
     "morgan": "^1.10.0",
-    "mysql2": "^2.3.3"
+    "mysql2": "^2.3.3",
+    "swagger-jsdoc": "^6.2.5",
+    "swagger-ui-express": "^4.6.0"
+
   },
   "devDependencies": {
     "@babel/core": "^7.20.2",

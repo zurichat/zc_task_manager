@@ -1,71 +1,14 @@
 import TableRow from "./TableRow"
 import classes from "./Table.module.css"
-const dummy_data = [
-  {
-    name: "Design a Mixed Reality Application",
-    date: "2020-01-01",
-    deadline: "2020-01-01",
-    time: "10:00",
-    others: ["Update", "Delete"]
-  },
-  {
-    name: "Design a Mixed Reality Application",
-    date: "2020-01-01",
-    deadline: "2020-01-01",
-    time: "10:00",
-    others: ["Udate", "Delete"]
-  },
-  {
-    name: "Design a Mixed Reality Application",
-    date: "2020-01-01",
-    deadline: "2020-01-01",
-    time: "10:00",
-    others: ["Update", "Delete"]
-  },
-  {
-    name: "Design a Mixed Reality Application",
-    date: "2020-01-01",
-    deadline: "2020-01-01",
-    time: "10:00",
-    others: ["Update", "Delete"]
-  },
-  {
-    name: "Design a Mixed Reality Application",
-    date: "2020-01-01",
-    deadline: "2020-01-01",
-    time: "10:00",
-    others: ["Update", "Delete"]
-  },
-  {
-    name: "Design a Mixed Reality Application",
-    date: "2020-01-01",
-    deadline: "2020-01-01",
-    time: "10:00",
-    others: ["Update", "Delete"]
-  },
-  {
-    name: "Design a Mixed Reality Application",
-    date: "2020-01-01",
-    deadline: "2020-01-01",
-    time: "10:00",
-    others: ["Update", "Delete"]
-  },
-  {
-    name: "Design a Mixed Reality Application",
-    date: "2020-01-01",
-    deadline: "2020-01-01",
-    time: "10:00",
-    others: ["Update", "Delete"]
-  },
-  {
-    name: "Design a Mixed Reality Application",
-    date: "2020-01-01",
-    deadline: "2020-01-01",
-    time: "10:00",
-    others: ["Update", "Delete"]
-  }
-]
+import { useGetTasksQuery } from "../../api/TaskApi"
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
 const Table = () => {
+  const organization_id = "61db3b27eba8adb50ca1399b"
+  const {
+    data: tasks,
+    isLoading,
+    isError
+  } = useGetTasksQuery(9, organization_id)
   return (
     <table className={classes.table}>
       <thead>
@@ -78,14 +21,28 @@ const Table = () => {
         </tr>
       </thead>
       <tbody>
-        {dummy_data.map((item, index) => (
+        {isLoading && <LoadingSpinner />}
+        {isError && <h1 className={classes.h1}>Could not fetch tasks</h1>}
+        {tasks?.data.map((item, index) => (
           <TableRow
             key={index}
-            row1={item.name}
-            row2={item.date}
-            row3={item.deadline}
-            row4={item.time}
-            row5={item.others}
+            row1={item.taskTitle}
+            row2={
+              item.created_at
+                ? new Date(item.created_at).toLocaleString()
+                : "2/ 2/22"
+            }
+            row3={
+              item.created_at
+                ? new Date(item.created_at).toLocaleString()
+                : "2020 - 01 - 01"
+            }
+            row4={
+              item.created_at
+                ? new Date(item.created_at).toLocaleTimeString()
+                : "10:00"
+            }
+            row5={["Update", "Delete"]}
           />
         ))}
       </tbody>
