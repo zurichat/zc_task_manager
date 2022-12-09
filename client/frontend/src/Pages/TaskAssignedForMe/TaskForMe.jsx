@@ -1,4 +1,5 @@
 import Header from "../../components/Header/Header"
+import Pagination from "../../components/Pagination/Pagination"
 import Common from "../TaskAssigner/Common"
 import Table from "../TaskAssigner/Table"
 
@@ -11,6 +12,7 @@ const TaskAsignedPage = () => {
       />
       <Common title={'For me'} />
       <Table />
+      <Pagination />
     </section>
   )
 }

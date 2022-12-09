@@ -8,7 +8,7 @@ const Table = () => {
     data: tasks,
     isLoading,
     isError
-  } = useGetTasksQuery(9, organization_id)
+  } = useGetTasksQuery({ organization_id, page: 9 })
   return (
     <table className={classes.table}>
       <thead>
@@ -26,7 +26,7 @@ const Table = () => {
         {tasks?.data.map((item, index) => (
           <TableRow
             key={index}
-            row1={item.taskTitle}
+            row1={item?.task_title || item?.taskTitle}
             row2={
               item.created_at
                 ? new Date(item.created_at).toLocaleString()

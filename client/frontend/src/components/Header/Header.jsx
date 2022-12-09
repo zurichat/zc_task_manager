@@ -1,12 +1,17 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import img from "../Header/assets/pic.png"
 import { RiArrowDownSLine } from "react-icons/ri"
 import style from "./Header.module.css"
+import { PaginationContext } from "../../context/PaginationContext"
+import { useGetTasksQuery } from "../../api/TaskApi"
 
 const Header = ({ link }) => {
   const [show, setShow] = useState(false)
   const navigate = useNavigate()
+  const { currentPage } = useContext(PaginationContext)
+  const organization_id = "61db3b27eba8adb50ca1399b"
+  const { data: tasks } = useGetTasksQuery({ organization_id, page: currentPage })
 
   const allMonth = [
     "January",
@@ -37,15 +42,15 @@ const Header = ({ link }) => {
       <div className={style.assignment_details_grp}>
         <div className={style.assignment_details}>
           <span>
-            <p className={style.assigned_number}>00</p>
+            <p className={style.assigned_number}>{tasks?.data.length}</p>
             <p className={style.assigned_title}>Task Assigned</p>
           </span>
           <span>
-            <p className={style.assigned_number}>00</p>
+            <p className={style.assigned_number}>{tasks?.data.length}</p>
             <p className={style.assigned_title}>Admin tasks</p>
           </span>
           <span>
-            <p className={style.assigned_number}>00</p>
+            <p className={style.assigned_number}>{tasks?.data.length}</p>
             <p className={style.assigned_title}>Assignees</p>
           </span>
           <span>

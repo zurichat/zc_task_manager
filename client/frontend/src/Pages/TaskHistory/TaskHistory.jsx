@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useContext } from "react"
 // import tasks from "./Tasks.json"
 import "./style.css"
 import Header from "../../components/Header/Header"
@@ -7,22 +7,30 @@ import { CiFilter } from "react-icons/ci"
 import Filter from "../../components/filter/Filter"
 import { useGetTasksQuery } from "../../api/TaskApi"
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
+import Pagination from "../../components/Pagination/Pagination"
+import { PaginationContext } from "../../context/PaginationContext"
+import AssignedModal from "../../components/AssignedModal/AssignedModal"
 
 const TaskHistory = () => {
+
+  const [show, setShow] = useState(false)
+  const [descModal, setDescModal] = useState(false)
+  const { currentPage } = useContext(PaginationContext)
   const organization_id = "61db3b27eba8adb50ca1399b"
   const {
     data: tasks,
     isLoading,
     isError
-  } = useGetTasksQuery(9, organization_id)
-
-  const [show, setShow] = useState(false)
+  } = useGetTasksQuery({ organization_id, page: currentPage })
 
   const columns = [
     { heading: "Task Name", value: "name" },
     { heading: "Task type", value: "type" },
     { heading: "Date Created", value: "date" }
   ]
+  if (!isLoading) { console.log({ tasks, currentPage }) }
+
+
   return (
     <div style={{ width: "100%", padding: "2rem 3rem 1.5rem" }}>
       <Header link="Task" />
@@ -61,17 +69,21 @@ const TaskHistory = () => {
                   Could not load tasks history
                 </h1>
               )}
-              {tasks?.data?.map((item, index) => (
+              {tasks?.data.map((item, index) => (
                 <tr key={index}>
-                  <td key={index}>
-                    {item.taskTitle}
-                    <RiArrowDownSLine className="arrow-svg" />
+                  <td>
+                    {item?.task_title || item?.taskTitle}
+                    <RiArrowDownSLine
+                      className="arrow-svg"
+                      onClick={() => setDescModal(true)}
+                    />
+                    {descModal && <AssignedModal closeModal={() => setDescModal(false)} />}
                   </td>
-                  <td className="task-type-a" key={index}>
+                  <td className="task-type-a">
                     {" "}
                     By me
                   </td>
-                  <td key={index}>
+                  <td>
                     {item.created_at
                       ? new Date(item.created_at).toLocaleString()
                       : "2 / 2 / 22"}
@@ -83,6 +95,7 @@ const TaskHistory = () => {
           </table>
         </div>
       </div>
+      <Pagination />
     </div>
   )
 }
