@@ -10,13 +10,14 @@ import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
 import Pagination from "../../components/Pagination/Pagination"
 import { PaginationContext } from "../../context/PaginationContext"
 import AssignedModal from "../../components/AssignedModal/AssignedModal"
+import { AppCredentialsContext } from "../../context/AppCredentialsContext"
 
 const TaskHistory = () => {
 
   const [show, setShow] = useState(false)
   const [descModal, setDescModal] = useState(false)
   const { currentPage } = useContext(PaginationContext)
-  const organization_id = "61db3b27eba8adb50ca1399b"
+  const { organization_id } = useContext(AppCredentialsContext)
   const {
     data: tasks,
     isLoading,
