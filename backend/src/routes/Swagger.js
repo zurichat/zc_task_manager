@@ -26,17 +26,16 @@ const router = express.Router();
  *                          type: object
  *                          required:
  *                              - task_title
- *                              - task_descriptions
+ *                              - task_description
  *                              - task_deadline
  *                              - task_creator
  *                              - task_category
- *                              - task_status
- *                              - created_at
+ *                              - organization_id
  *                          properties:
  *                              task_title:
  *                                  type: string
  *                                  description: The title of the task
- *                              task_descriptions:
+ *                              task_description:
  *                                  type: string
  *                                  description: The description of the task
  *                              task_deadline:
@@ -48,12 +47,9 @@ const router = express.Router();
  *                              task_category:
  *                                  type: string
  *                                  description: The task category
- *                              task_status:
+ *                              organization_id:
  *                                  type: string
- *                                  description: Ttask status
- *                              created_at:
- *                                  type: string
- *                                  description: The time the task was created
+ *                                  description: The organization ID
  * 
  *         responses:
  *             '200':
@@ -151,10 +147,14 @@ const router = express.Router();
  *                          type: object
  *                          required:
  *                              - category_name
+*                               - organization_id
  *                          properties:
  *                              category_name:
  *                                  type: string
  *                                  description: The Task Category
+ *                              organization_id:
+ *                                  type: string
+ *                                  description: The Organization ID
  *       
  *         responses:
  *             '200':
@@ -193,8 +193,7 @@ const router = express.Router();
  *                              - task_assigner
  *                              - task_assignee
  *                              - for_channel
- *                              - task_id
- *                              - created_at
+ *                              - organization_id
  *                          properties:
  *                              task_assigner:
  *                                  type: string
@@ -203,14 +202,11 @@ const router = express.Router();
  *                                  type: string
  *                                  description: The user who is been assigned the task
  *                              for_channel:
+ *                                  type: boolean
+ *                                  description: Is the task been assigned to a channel?
+ *                              organization_id:
  *                                  type: string
- *                                  description: The for channel of the task
- *                              task_id:
- *                                  type: string
- *                                  description: The id of the task
- *                              created_at:
- *                                  type: string
- *                                  description: the date the task was assigned
+ *                                  description: The id of the organization
  *       
  *         responses:
  *             '200':
@@ -301,37 +297,36 @@ const router = express.Router();
  *                         schema:
  *                          type: object
  *                          required:
- *                              - _id
  *                              - task_title
- *                              - task_descriptions
+ *                              - task_description
  *                              - task_deadline
  *                              - task_creator
  *                              - task_category
- *                              - task_status
- *                              - updated_at
+ *                              - organization_id
+ *                              - task_id
  *                          properties:
- *                              _id:
- *                                  type: string
- *                                  description: The task id
  *                              task_title:
  *                                  type: string
  *                                  description: The title of the task
- *                              task_descriptions:
+ *                              task_description:
  *                                  type: string
- *                                  description: The descriptions of the task
+ *                                  description: The description of the task
  *                              task_deadline:
  *                                  type: string
- *                                  description: The deadline of the task
+ *                                  description: the deadline for the task
  *                              task_creator:
  *                                  type: string
- *                                  description: The creator of the task
- *                              task_status:
+ *                                  description: the task creator
+ *                              task_category:
  *                                  type: string
- *                                  description: The status of the task
- *                              updated_at:
+ *                                  description: The task category
+ *                              organization_id:
  *                                  type: string
- *                                  description: The date the task was updated
- *       
+ *                                  description: The organization ID
+ *                              task_id:
+ *                                  type: string
+ *                                  description: The id of the task been updated
+ * 
  *         responses:
  *             '200':
  *                description: success
@@ -379,7 +374,7 @@ const router = express.Router();
  *                                     description: success message.
  * /task/delete:
  *     post:
- *         summary: used to update a task
+ *         summary: used to delete a task
  *         tags:
  *             - Task
  *         requestBody:
@@ -390,36 +385,15 @@ const router = express.Router();
  *                         schema:
  *                          type: object
  *                          required:
- *                              - _id
- *                              - task_title
- *                              - task_descriptions
- *                              - task_deadline
- *                              - task_creator
- *                              - task_category
- *                              - task_status
- *                              - updated_at
+ *                              - task_id
+ *                              - organization_id
  *                          properties:
- *                              _id:
+ *                              task_id:
  *                                  type: string
  *                                  description: The task id
- *                              task_title:
+ *                              organization_id:
  *                                  type: string
- *                                  description: The title of the task
- *                              task_descriptions:
- *                                  type: string
- *                                  description: The descriptions of the task
- *                              task_deadline:
- *                                  type: string
- *                                  description: The deadline of the task
- *                              task_creator:
- *                                  type: string
- *                                  description: The creator of the task
- *                              task_status:
- *                                  type: string
- *                                  description: The status of the task
- *                              updated_at:
- *                                  type: string
- *                                  description: The date the task was updated
+ *                                  description: The organization id
  *       
  *         responses:
  *             '200':
@@ -495,20 +469,20 @@ const router = express.Router();
  *                              - submission_link
  *                              - task_id
  *                              - task_assignee
- *                              - created_at
+ *                              - organization_id
  *                          properties:
  *                              submission_link:
  *                                  type: string
- *                                  description: The liink for submission
+ *                                  description: The link for submission
  *                              task_id:
  *                                  type: string
  *                                  description: The id of the task
  *                              task_assignee:
  *                                  type: string
  *                                  description: The user the task was assigned to
- *                              created_at:
+ *                              organization_id:
  *                                  type: string
- *                                  description: The date the task was created
+ *                                  description: The organization id
  *       
  *         responses:
  *             '200':
@@ -530,37 +504,7 @@ const router = express.Router();
  *                                      object_id:
  *                                           type: string
  *                                           description: the id of the document
- * /task/category/:category_id:
- *     post:
- *         summary: used to delete a category
- *         tags:
- *             - Task
- *         parameters:
- *             - in: path
- *               name: assignee_id
- *               schema:
- *                    type: string
- *                    required: true
- *         responses:
- *             '200':
- *                description: success
- *                content:
- *                    application/json:
- *                        schema:
- *                            type: object
- *                            properties:
- *                                message:
- *                                     type: string
- *                                     description: success message.
- *                                data:
- *                                     type: object
- *                                     properties:
- *                                      insert_count:
- *                                           type: integer
- *                                           description: the inser count
- *                                      object_id:
- *                                           type: string
- *                                           description: the id of the document
+ * 
  * /task/{assigned_task_id}/reassign/:
  *     patch:
  *         summary: Reassign an assigned task
@@ -618,6 +562,80 @@ const router = express.Router();
  *                                           type: string
  *                                           description: the id of the document
  *       
+ * 
+ * /info:
+ *     post:
+ *         summary: used to get the information about a plugin
+ *         tags:
+ *             - Plugin
+ *         requestBody:
+ *             description: a json with all fields
+ *             required: true
+ *             content:
+ *                 application/json:
+ *                         schema:
+ *                          type: object
+ *                          required:
+ *                              - task_id
+ *                              - plugin_id
+ *                              - organization_id
+ *                          properties:
+ *                              task_id:
+ *                                  type: string
+ *                                  description: The id of the task
+ *                              plugin_id:
+ *                                  type: string
+ *                                  description: The id of the plugin
+ *                              organization_id:
+ *                                  type: string
+ *                                  description: The organization id
+ *       
+ *         responses:
+ *             '200':
+ *                description: success
+ *                content:
+ *                    application/json:
+ *                        schema:
+ *                            type: object
+ *                            properties:
+ *                                plugin_id:
+ *                                     type: string
+ *                                     description: plugin id.
+ *                                name:
+ *                                     type: string
+ *                                     description: plugin name.
+ *                                description:
+ *                                     type: string
+ *                                     description: what the plugin is for.
+ *                                category:
+ *                                     type: string
+ *                                     description: category of the plugin.
+ *                                version:
+ *                                     type: string
+ *                                     description: current version of the plugin.
+ *                                install_url:
+ *                                     type: string
+ *                                     description: url for installing the plugin.
+ * 
+ * 
+ * /sidebar:
+ *     get:
+ *         summary: used to get the information about the sidebar
+ *         tags:
+ *             - Plugin
+ *         requestBody:
+ *             description: a json with all fields
+ *             required: true
+ *             content:
+ *                 application/json:
+ *                         schema:
+ *                          type: object
+ *                          
+ *       
+ *         responses:
+ *             '200':
+ *                description: success
+ *                        
  * 
  */
 
