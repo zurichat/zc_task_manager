@@ -3,7 +3,7 @@ import React, { useState, createContext } from 'react'
 export const PaginationContext = createContext()
 
 const PaginationContextProvider = (props) => {
-    const [currentPage, setCurrentPage] = useState(9)
+    const [currentPage, setCurrentPage] = useState(1)
 
     const paginate = (pageNumber) => {
         setCurrentPage(pageNumber)

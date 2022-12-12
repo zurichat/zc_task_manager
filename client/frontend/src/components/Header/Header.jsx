@@ -4,13 +4,14 @@ import img from "../Header/assets/pic.png"
 import { RiArrowDownSLine } from "react-icons/ri"
 import style from "./Header.module.css"
 import { PaginationContext } from "../../context/PaginationContext"
+import { AppCredentialsContext } from "../../context/AppCredentialsContext"
 import { useGetTasksQuery } from "../../api/TaskApi"
 
 const Header = ({ link }) => {
   const [show, setShow] = useState(false)
   const navigate = useNavigate()
   const { currentPage } = useContext(PaginationContext)
-  const organization_id = "61db3b27eba8adb50ca1399b"
+  const { organization_id } = useContext(AppCredentialsContext)
   const { data: tasks } = useGetTasksQuery({ organization_id, page: currentPage })
 
   const allMonth = [

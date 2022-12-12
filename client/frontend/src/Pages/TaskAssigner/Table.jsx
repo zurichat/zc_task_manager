@@ -1,14 +1,17 @@
+import React, { useContext } from 'react'
 import TableRow from "./TableRow"
 import classes from "./Table.module.css"
 import { useGetTasksQuery } from "../../api/TaskApi"
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
+import { AppCredentialsContext } from "../../context/AppCredentialsContext"
 const Table = () => {
-  const organization_id = "61db3b27eba8adb50ca1399b"
+  const { organization_id } = useContext(AppCredentialsContext)
   const {
     data: tasks,
     isLoading,
     isError
-  } = useGetTasksQuery({ organization_id, page: 9 })
+  } = useGetTasksQuery({ organization_id, page: 1 })
+  console.log(tasks);
   return (
     <table className={classes.table}>
       <thead>
@@ -23,7 +26,7 @@ const Table = () => {
       <tbody>
         {isLoading && <LoadingSpinner />}
         {isError && <h1 className={classes.h1}>Could not fetch tasks</h1>}
-        {tasks?.data.map((item, index) => (
+        {tasks?.data?.map((item, index) => (
           <TableRow
             key={index}
             row1={item?.task_title || item?.taskTitle}
