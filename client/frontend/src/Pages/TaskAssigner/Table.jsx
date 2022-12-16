@@ -4,13 +4,15 @@ import classes from "./Table.module.css"
 import { useGetTasksQuery } from "../../api/TaskApi"
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner"
 import { AppCredentialsContext } from "../../context/AppCredentialsContext"
+import { PaginationContext } from '../../context/PaginationContext'
 const Table = () => {
   const { organization_id } = useContext(AppCredentialsContext)
+  const { currentPage } = useContext(PaginationContext)
   const {
     data: tasks,
     isLoading,
     isError
-  } = useGetTasksQuery({ organization_id, page: 1 })
+  } = useGetTasksQuery({ organization_id, page: currentPage })
   console.log(tasks);
   return (
     <table className={classes.table}>
@@ -28,6 +30,7 @@ const Table = () => {
         {isError && <h1 className={classes.h1}>Could not fetch tasks</h1>}
         {tasks?.data?.map((item, index) => (
           <TableRow
+            taskDescription={item?.task_description || item?.taskDescription}
             key={index}
             row1={item?.task_title || item?.taskTitle}
             row2={
