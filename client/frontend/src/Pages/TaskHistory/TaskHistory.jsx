@@ -78,7 +78,7 @@ const TaskHistory = () => {
                       className="arrow-svg"
                       onClick={() => setDescModal(true)}
                     />
-                    {descModal && <AssignedModal closeModal={() => setDescModal(false)} />}
+                    {descModal && <AssignedModal taskMessage={item?.task_description || item?.taskDescription} closeModal={() => setDescModal(false)} />}
                   </td>
                   <td className="task-type-a">
                     {" "}

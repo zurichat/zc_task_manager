@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-const baseUrl = 'https://hng-s8o8.onrender.com'
+const baseUrl = 'https://task2.zuri.chat/api'
 
 const createRequest = (url) => (url)
 
@@ -10,6 +10,12 @@ export const TasksApi = createApi({
     endpoints: (builder) => ({
         getTasks: builder.query({
             query: ({ organization_id, page }) => createRequest(`/task/${organization_id}/?page=${page}`)
+        }),
+        getCategories: builder.query({
+            query: (organization_id) => createRequest(`/task/${organization_id}/categories`)
+        }),
+        getTaskByMe: builder.query({
+            query: ({ task_creator, organization_id }) => createRequest(`/task/${task_creator}/?org=${organization_id}/`)
         }),
         addTask: builder.mutation({
             query: (task) => ({
@@ -36,6 +42,8 @@ export const TasksApi = createApi({
 
 export const {
     useGetTasksQuery,
+    useGetCategoriesQuery,
+    useGetTaskByMeQuery,
     useAddTaskMutation,
     useUpdateTaskMutation,
     useDeleteTaskMutation

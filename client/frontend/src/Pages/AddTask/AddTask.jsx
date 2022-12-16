@@ -1,16 +1,24 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import Header from "../../components/Header/Header"
 import style from "./AddTask.module.css"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Select from 'react-select'
+import { useGetCategoriesQuery } from "../../api/TaskApi";
+import { AppCredentialsContext } from "../../context/AppCredentialsContext";
+import { PaginationContext } from "../../context/PaginationContext";
 
 const AddTask = () => {
   const [value, setValue] = useState({
     taskTitle: "",
     taskDescription: "",
     submissionDate: "",
-    submissionTime: ""
+    submissionTime: "",
+    taskCategory: ""
   })
+  const { organization_id } = useContext(AppCredentialsContext)
+  const { currentPage } = useContext(PaginationContext)
+  const { data: categories } = useGetCategoriesQuery(organization_id)
 
   const onChangeInput = e => {
     let name = e.target.name
@@ -22,11 +30,15 @@ const AddTask = () => {
     })
   }
 
+  const handleChange = (selected) => {
+    setValue({ ...value, taskCategory: selected.value })
+  }
+
   let onSubmit = (e) => {
     e.preventDefault();
     console.log('love')
-    const { taskTitle, taskDescription, submissionDate, submissionTime } = value
-    if (!taskTitle || !taskDescription || !submissionDate || !submissionTime) {
+    const { taskTitle, taskDescription, submissionDate, submissionTime, taskCategory } = value
+    if (!taskTitle || !taskDescription || !submissionDate || !submissionTime || !taskCategory) {
       console.log('killer')
       toast.error('please, fill all fields', {
         position: "top-right",
@@ -41,12 +53,12 @@ const AddTask = () => {
     }
     else {
       // team sandpaper backend refused to turn up
-      fetch('https://hng-s8o8.onrender.com/task', {
+      fetch('https://task2.zuri.chat/api/task', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...value, organization_id: '61db3b27eba8adb50ca1399b' }),
+        body: JSON.stringify({ ...value, organization_id, page: currentPage }),
       })
         .then((response) => response.json())
         .then((data) => {
@@ -77,6 +89,13 @@ const AddTask = () => {
 
 
   }
+
+  const options = []
+  categories?.data?.map((item, index) => (
+    options.push({ value: item.category_name, label: item.category_name })
+  ))
+
+  console.log(options, value)
 
   return (
     <div style={{ width: "100%", padding: "2rem 3rem 1.5rem" }}>
@@ -150,7 +169,10 @@ const AddTask = () => {
               />
             </div>
           </div>
-
+          <div>
+            <label className={style.label}>Select category</label>
+            <Select options={options} onChange={handleChange} />
+          </div>
           <button
             className={style.submitBtn}
             onClick={onSubmit}
